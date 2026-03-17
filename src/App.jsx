@@ -1,4 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { supabase } from "./supabase";
+import { loadFromSupabase, saveToSupabase } from "./sync";
 
 // ═════════════════════════════════════════════════════════════
 // BHOJAN v3 — Indian Vegetarian Family Meal Planner
@@ -487,7 +489,7 @@ function genGrocery(plan, servings = 6) {
 
 // ═══ PERSISTENCE ═══
 const STORAGE_KEY = "bhojan_v1";
-function loadSaved() {
+function loadLocal() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
@@ -501,9 +503,22 @@ function loadSaved() {
   } catch { return null; }
 }
 
+function saveLocal(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* quota */ }
+}
+
 // ═══ APP ═══
 export default function Bhojan() {
-  const saved = loadSaved();
+  const saved = loadLocal();
+
+  // ── Auth state ──
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(!!supabase);
+  const [householdId, setHouseholdId] = useState(null);
+  const syncTimer = useRef(null);
+  const [syncStatus, setSyncStatus] = useState(null); // "saving" | "saved" | "offline" | null
+
+  // ── App state ──
   const [step, setStep] = useState(saved?.step ?? "onboard");
   const [obStep, setObStep] = useState(0);
   const [screen, setScreen] = useState("today");
@@ -526,6 +541,41 @@ export default function Bhojan() {
 
   const today = fmtD(new Date());
 
+  // ── Auth listener ──
+  useEffect(() => {
+    if (!supabase) { setAuthLoading(false); return; }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // ── Load from Supabase on login ──
+  useEffect(() => {
+    if (!user) return;
+    loadFromSupabase(user.id).then(cloud => {
+      if (!cloud) return; // new user — will sync after onboarding
+      setHouseholdId(cloud.householdId);
+      if (cloud.step) setStep(cloud.step);
+      if (cloud.familyName) setFamilyName(cloud.familyName);
+      if (cloud.members?.length) setMembers(cloud.members);
+      if (cloud.servings) setServings(cloud.servings);
+      if (cloud.hasBaby !== undefined) setHasBaby(cloud.hasBaby);
+      if (cloud.prefs) setPrefs(cloud.prefs);
+      if (cloud.liked?.length) setLiked(cloud.liked);
+      if (cloud.disliked?.length) setDisliked(cloud.disliked);
+      if (cloud.plan) setPlan(cloud.plan);
+      if (cloud.locked) setLocked(cloud.locked);
+      if (cloud.grocCheck) setGrocCheck(cloud.grocCheck);
+      if (cloud.ratings) setRatings(cloud.ratings);
+    });
+  }, [user]);
+
+  // ── Plan init ──
   useEffect(() => {
     if (step === "main" && !plan) {
       const p = genPlan(locked, disliked, prefs);
@@ -535,16 +585,36 @@ export default function Bhojan() {
       setGrocery(genGrocery(plan, servings));
       const eat = {}; members.forEach(m => { eat[m.id] = true; }); setEatingToday(eat);
     }
-  }, [step]);
+  }, [step, plan]);
 
+  // ── Save to localStorage (immediate) + Supabase (debounced) ──
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        step, familyName, members, servings, hasBaby, prefs,
-        plan, locked, disliked, liked, grocCheck, ratings
-      }));
-    } catch { /* quota exceeded */ }
+    const state = { step, familyName, members, servings, hasBaby, prefs, plan, locked, disliked, liked, grocCheck, ratings };
+    saveLocal(state);
+
+    if (!user) return;
+    if (syncTimer.current) clearTimeout(syncTimer.current);
+    setSyncStatus("saving");
+    syncTimer.current = setTimeout(async () => {
+      const hId = await saveToSupabase(user.id, householdId, state);
+      if (hId && hId !== householdId) setHouseholdId(hId);
+      setSyncStatus(hId ? "saved" : "offline");
+      setTimeout(() => setSyncStatus(null), 2000);
+    }, 1500);
   }, [step, familyName, members, servings, hasBaby, prefs, plan, locked, disliked, liked, grocCheck, ratings]);
+
+  const signInWithGoogle = async () => {
+    if (!supabase) return;
+    await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: window.location.origin } });
+  };
+
+  const signOut = async () => {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setUser(null);
+    setHouseholdId(null);
+    setSyncStatus(null);
+  };
 
   const regen = () => { const p = genPlan(locked, disliked, prefs); setPlan(p); setGrocery(genGrocery(p, servings)); };
   const doSwap = meal => { if (!swapT) return; setPlan(p => { const u = { ...p, [swapT.ds]: { ...p[swapT.ds], [swapT.mt]: meal } }; setGrocery(genGrocery(u, servings)); return u; }); setSwapT(null); };
@@ -598,6 +668,39 @@ export default function Bhojan() {
     if (err) return <div style={{ ...s, background: grad, display: "flex", alignItems: "center", justifyContent: "center", fontSize: s?.height > 80 ? 48 : 28 }}>{em}</div>;
     return <img src={src} alt={name} onError={() => setErr(true)} style={{ ...s, objectFit: "cover" }} loading="lazy" />;
   };
+
+  // ═══ AUTH LOADING ═══
+  if (authLoading) {
+    return (
+      <div style={{ fontFamily: "'Source Sans 3',sans-serif", minHeight: "100vh", background: C.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <style>{fonts}</style>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontSize: 48, marginBottom: 8 }}>🍲</div>
+          <div style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 700, color: C.brown }}>Loading...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // ═══ LOGIN SCREEN (only when Supabase is configured) ═══
+  if (supabase && !user && step === "onboard") {
+    return (
+      <div style={{ fontFamily: "'Source Sans 3',sans-serif", minHeight: "100vh", background: C.bg, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+        <style>{fonts}</style>
+        <div style={{ textAlign: "center", maxWidth: 360 }}>
+          <div style={{ fontSize: 64, marginBottom: 8 }}>🍲</div>
+          <h1 style={{ fontFamily: "'Outfit'", fontSize: 36, fontWeight: 900, color: C.brown, margin: "0 0 4px", letterSpacing: "-0.03em" }}>Bhojan</h1>
+          <p style={{ color: C.brownL, fontSize: 14, margin: "0 0 32px" }}>Your family's weekly meal planner</p>
+          <button onClick={signInWithGoogle} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "14px 20px", borderRadius: 14, border: `2px solid ${C.border}`, background: C.card, fontSize: 15, fontWeight: 600, cursor: "pointer", color: C.brown, fontFamily: "'Source Sans 3'" }}>
+            <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            Sign in with Google
+          </button>
+          <p style={{ color: C.brownL, fontSize: 11, marginTop: 16 }}>Your meal plans sync across devices</p>
+          <button onClick={() => setStep("onboard")} style={{ marginTop: 12, background: "none", border: "none", color: C.brownL, fontSize: 12, cursor: "pointer", textDecoration: "underline" }}>Continue without signing in</button>
+        </div>
+      </div>
+    );
+  }
 
   // ═══ ONBOARDING (5 steps, ~5 min) ═══
   if (step === "onboard") {
@@ -850,8 +953,20 @@ export default function Bhojan() {
   // ═══ SCREENS ═══
   const TodayScreen = () => (
     <div style={{ padding: "14px 14px 100px" }}>
-      <h1 style={{ fontFamily: "'Outfit'", fontSize: 24, fontWeight: 900, color: C.brown, margin: "0 0 2px" }}>{familyName ? `${familyName}'s Kitchen` : "Today"} 🍲</h1>
-      <p style={{ color: C.brownL, fontSize: 12, margin: "0 0 12px" }}>{new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })}</p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div>
+          <h1 style={{ fontFamily: "'Outfit'", fontSize: 24, fontWeight: 900, color: C.brown, margin: "0 0 2px" }}>{familyName ? `${familyName}'s Kitchen` : "Today"} 🍲</h1>
+          <p style={{ color: C.brownL, fontSize: 12, margin: "0 0 12px" }}>{new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })}</p>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, paddingTop: 4 }}>
+          {syncStatus && <span style={{ fontSize: 9, color: syncStatus === "saved" ? C.green : syncStatus === "offline" ? C.red : C.brownL, fontWeight: 600 }}>{syncStatus === "saving" ? "Syncing..." : syncStatus === "saved" ? "Synced" : "Offline"}</span>}
+          {user ? (
+            <button onClick={signOut} style={{ background: C.card, border: `1.5px solid ${C.border}`, borderRadius: 8, padding: "4px 8px", fontSize: 10, color: C.brownL, cursor: "pointer", fontWeight: 600 }}>Sign out</button>
+          ) : supabase ? (
+            <button onClick={signInWithGoogle} style={{ background: C.orangeL, border: `1.5px solid ${C.orange}`, borderRadius: 8, padding: "4px 8px", fontSize: 10, color: C.orange, cursor: "pointer", fontWeight: 600 }}>Sign in</button>
+          ) : null}
+        </div>
+      </div>
       <div style={{ background: C.card, borderRadius: 14, padding: 10, border: `1.5px solid ${C.border}`, marginBottom: 12 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
           <span style={{ fontSize: 12, fontWeight: 700, color: C.brownM }}>👥 Eating today: {eatCount}</span>
