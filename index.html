@@ -2,12 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bhojan</title>
+    <title>Bhojan — Indian Vegetarian Meal Planner</title>
+    <meta name="description" content="Plan a week of delicious vegetarian Indian meals for your family in 60 seconds. Smart grocery lists, nutrition tracking, and regional cuisine support." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#D4760A" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bhojan — Indian Vegetarian Meal Planner" />
+    <meta property="og:description" content="Plan a week of delicious vegetarian Indian meals for your family in 60 seconds." />
+    <meta property="og:site_name" content="Bhojan" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Bhojan — Indian Vegetarian Meal Planner" />
+    <meta name="twitter:description" content="Plan a week of delicious vegetarian Indian meals for your family in 60 seconds." />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js");
+      }
+    </script>
   </body>
 </html>

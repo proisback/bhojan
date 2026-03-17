@@ -485,24 +485,41 @@ function genGrocery(plan, servings = 6) {
   return cats;
 }
 
+// ═══ PERSISTENCE ═══
+const STORAGE_KEY = "bhojan_v1";
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    const currentWeekKeys = new Set(weekDates.map(fmtD));
+    if (data.plan) {
+      const isStale = !Object.keys(data.plan).some(k => currentWeekKeys.has(k));
+      if (isStale) { data.plan = null; data.locked = {}; data.grocCheck = {}; data.ratings = {}; }
+    }
+    return data;
+  } catch { return null; }
+}
+
 // ═══ APP ═══
 export default function Bhojan() {
-  const [step, setStep] = useState("onboard");
+  const saved = loadSaved();
+  const [step, setStep] = useState(saved?.step ?? "onboard");
   const [obStep, setObStep] = useState(0);
   const [screen, setScreen] = useState("today");
-  const [familyName, setFamilyName] = useState("");
-  const [members, setMembers] = useState([{ id: 1, name: "", role: "Mother" }, { id: 2, name: "", role: "Father" }]);
-  const [servings, setServings] = useState(6);
-  const [hasBaby, setHasBaby] = useState(true);
-  const [prefs, setPrefs] = useState({ regions: [], spice: "medium", maxEffort: 45 });
+  const [familyName, setFamilyName] = useState(saved?.familyName ?? "");
+  const [members, setMembers] = useState(saved?.members ?? [{ id: 1, name: "", role: "Mother" }, { id: 2, name: "", role: "Father" }]);
+  const [servings, setServings] = useState(saved?.servings ?? 6);
+  const [hasBaby, setHasBaby] = useState(saved?.hasBaby ?? true);
+  const [prefs, setPrefs] = useState(saved?.prefs ?? { regions: [], spice: "medium", maxEffort: 45 });
   const [eatingToday, setEatingToday] = useState({});
-  const [plan, setPlan] = useState(null);
-  const [locked, setLocked] = useState({});
-  const [disliked, setDisliked] = useState([]);
-  const [liked, setLiked] = useState([]);
+  const [plan, setPlan] = useState(saved?.plan ?? null);
+  const [locked, setLocked] = useState(saved?.locked ?? {});
+  const [disliked, setDisliked] = useState(saved?.disliked ?? []);
+  const [liked, setLiked] = useState(saved?.liked ?? []);
   const [grocery, setGrocery] = useState(null);
-  const [grocCheck, setGrocCheck] = useState({});
-  const [ratings, setRatings] = useState({});
+  const [grocCheck, setGrocCheck] = useState(saved?.grocCheck ?? {});
+  const [ratings, setRatings] = useState(saved?.ratings ?? {});
   const [swapT, setSwapT] = useState(null);
   const [detail, setDetail] = useState(null);
   const [tasteIdx, setTasteIdx] = useState(0);
@@ -514,8 +531,20 @@ export default function Bhojan() {
       const p = genPlan(locked, disliked, prefs);
       setPlan(p); setGrocery(genGrocery(p, servings));
       const eat = {}; members.forEach(m => { eat[m.id] = true; }); setEatingToday(eat);
+    } else if (step === "main" && plan && !grocery) {
+      setGrocery(genGrocery(plan, servings));
+      const eat = {}; members.forEach(m => { eat[m.id] = true; }); setEatingToday(eat);
     }
   }, [step]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        step, familyName, members, servings, hasBaby, prefs,
+        plan, locked, disliked, liked, grocCheck, ratings
+      }));
+    } catch { /* quota exceeded */ }
+  }, [step, familyName, members, servings, hasBaby, prefs, plan, locked, disliked, liked, grocCheck, ratings]);
 
   const regen = () => { const p = genPlan(locked, disliked, prefs); setPlan(p); setGrocery(genGrocery(p, servings)); };
   const doSwap = meal => { if (!swapT) return; setPlan(p => { const u = { ...p, [swapT.ds]: { ...p[swapT.ds], [swapT.mt]: meal } }; setGrocery(genGrocery(u, servings)); return u; }); setSwapT(null); };
