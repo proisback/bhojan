@@ -554,24 +554,45 @@ export default function Bhojan() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // ── Load from Supabase on login ──
+  // ── Load from Supabase on login / auto-create household for new users ──
   useEffect(() => {
     if (!user) return;
-    loadFromSupabase(user.id).then(cloud => {
-      if (!cloud) return; // new user — will sync after onboarding
-      setHouseholdId(cloud.householdId);
-      if (cloud.step) setStep(cloud.step);
-      if (cloud.familyName) setFamilyName(cloud.familyName);
-      if (cloud.members?.length) setMembers(cloud.members);
-      if (cloud.servings) setServings(cloud.servings);
-      if (cloud.hasBaby !== undefined) setHasBaby(cloud.hasBaby);
-      if (cloud.prefs) setPrefs(cloud.prefs);
-      if (cloud.liked?.length) setLiked(cloud.liked);
-      if (cloud.disliked?.length) setDisliked(cloud.disliked);
-      if (cloud.plan) setPlan(cloud.plan);
-      if (cloud.locked) setLocked(cloud.locked);
-      if (cloud.grocCheck) setGrocCheck(cloud.grocCheck);
-      if (cloud.ratings) setRatings(cloud.ratings);
+    loadFromSupabase(user.id).then(async (cloud) => {
+      if (cloud) {
+        // Returning user — load cloud data
+        setHouseholdId(cloud.householdId);
+        if (cloud.step) setStep(cloud.step);
+        if (cloud.familyName) setFamilyName(cloud.familyName);
+        if (cloud.members?.length) setMembers(cloud.members);
+        if (cloud.servings) setServings(cloud.servings);
+        if (cloud.hasBaby !== undefined) setHasBaby(cloud.hasBaby);
+        if (cloud.prefs) setPrefs(cloud.prefs);
+        if (cloud.liked?.length) setLiked(cloud.liked);
+        if (cloud.disliked?.length) setDisliked(cloud.disliked);
+        if (cloud.plan) setPlan(cloud.plan);
+        if (cloud.locked) setLocked(cloud.locked);
+        if (cloud.grocCheck) setGrocCheck(cloud.grocCheck);
+        if (cloud.ratings) setRatings(cloud.ratings);
+      } else {
+        // New user — auto-create household with current localStorage state
+        const local = loadLocal();
+        const state = {
+          familyName: local?.familyName || familyName || "",
+          members: local?.members || members,
+          servings: local?.servings || servings,
+          hasBaby: local?.hasBaby ?? hasBaby,
+          prefs: local?.prefs || prefs,
+          liked: local?.liked || liked,
+          disliked: local?.disliked || disliked,
+          plan: local?.plan || plan,
+          locked: local?.locked || locked,
+          grocCheck: local?.grocCheck || grocCheck,
+          ratings: local?.ratings || ratings,
+          step: local?.step || step,
+        };
+        const hId = await saveToSupabase(user.id, null, state);
+        if (hId) setHouseholdId(hId);
+      }
     });
   }, [user]);
 
