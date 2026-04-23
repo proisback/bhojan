@@ -16,13 +16,15 @@ function weekStartFromPlan(plan) {
 export async function loadFromSupabase(userId) {
   if (!supabase) return null;
   try {
-    // Get household
-    const { data: household, error: hErr } = await supabase
+    // Get household — tolerate duplicates (pick oldest by created_at)
+    const { data: households, error: hErr } = await supabase
       .from("households")
       .select("*")
       .eq("owner_id", userId)
-      .maybeSingle();
+      .order("created_at", { ascending: true })
+      .limit(1);
     if (hErr) throw hErr;
+    const household = households?.[0];
     if (!household) return null; // new user, no data yet
 
     // Parallel fetches
@@ -85,6 +87,17 @@ export async function saveToSupabase(userId, householdId, state) {
   try {
     // Upsert household
     let hId = householdId;
+    if (!hId) {
+      // Guard: reuse existing household for this owner_id (oldest by created_at) — prevents duplicate inserts after load failures
+      const { data: existing, error: exErr } = await supabase
+        .from("households")
+        .select("id")
+        .eq("owner_id", userId)
+        .order("created_at", { ascending: true })
+        .limit(1);
+      if (exErr) throw exErr;
+      hId = existing?.[0]?.id;
+    }
     if (!hId) {
       const { data, error } = await supabase.from("households").insert({
         owner_id: userId,
