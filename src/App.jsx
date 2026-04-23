@@ -519,6 +519,7 @@ export default function Bhojan() {
 
   // ── Auth state ──
   const [user, setUser] = useState(null);
+  const [skipLogin, setSkipLogin] = useState(false);
   const [authLoading, setAuthLoading] = useState(!!supabase);
   const [householdId, setHouseholdId] = useState(null);
   const syncTimer = useRef(null);
@@ -710,7 +711,7 @@ export default function Bhojan() {
   }
 
   // ═══ LOGIN SCREEN (only when Supabase is configured) ═══
-  if (supabase && !user && step === "onboard") {
+  if (supabase && !user && step === "onboard" && !skipLogin) {
     return (
       <div style={{ fontFamily: "'Source Sans 3',sans-serif", minHeight: "100vh", background: C.bg, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
         <style>{fonts}</style>
@@ -723,7 +724,7 @@ export default function Bhojan() {
             Sign in with Google
           </button>
           <p style={{ color: C.brownL, fontSize: 11, marginTop: 16 }}>Your meal plans sync across devices</p>
-          <button onClick={() => setStep("onboard")} style={{ marginTop: 12, background: "none", border: "none", color: C.brownL, fontSize: 12, cursor: "pointer", textDecoration: "underline" }}>Continue without signing in</button>
+          <button onClick={() => setSkipLogin(true)} style={{ marginTop: 12, background: "none", border: "none", color: C.brownL, fontSize: 12, cursor: "pointer", textDecoration: "underline" }}>Continue without signing in</button>
         </div>
       </div>
     );
