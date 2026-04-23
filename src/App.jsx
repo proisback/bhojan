@@ -1,6 +1,12 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { supabase } from "./supabase";
 import { loadFromSupabase, saveToSupabase } from "./sync";
+import GroceryScreen from "./components/GroceryScreen.jsx";
+import TodayScreen from "./components/TodayScreen.jsx";
+import WeekScreen from "./components/WeekScreen.jsx";
+import AnalyticsScreen from "./components/AnalyticsScreen.jsx";
+import LibraryScreen from "./components/LibraryScreen.jsx";
+import ReviewScreen from "./components/ReviewScreen.jsx";
 
 // ═════════════════════════════════════════════════════════════
 // BHOJAN v3 — Indian Vegetarian Family Meal Planner
@@ -972,226 +978,6 @@ export default function Bhojan() {
   };
 
   // ═══ SCREENS ═══
-  const TodayScreen = () => (
-    <div style={{ padding: "14px 14px 100px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <div>
-          <h1 style={{ fontFamily: "'Outfit'", fontSize: 24, fontWeight: 900, color: C.brown, margin: "0 0 2px" }}>{familyName ? `${familyName}'s Kitchen` : "Today"} 🍲</h1>
-          <p style={{ color: C.brownL, fontSize: 12, margin: "0 0 12px" }}>{new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })}</p>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, paddingTop: 4 }}>
-          {syncStatus && <span style={{ fontSize: 9, color: syncStatus === "saved" ? C.green : syncStatus === "offline" ? C.red : C.brownL, fontWeight: 600 }}>{syncStatus === "saving" ? "Syncing..." : syncStatus === "saved" ? "Synced" : "Offline"}</span>}
-          {user ? (
-            <button onClick={signOut} style={{ background: C.card, border: `1.5px solid ${C.border}`, borderRadius: 8, padding: "4px 8px", fontSize: 10, color: C.brownL, cursor: "pointer", fontWeight: 600 }}>Sign out</button>
-          ) : supabase ? (
-            <button onClick={signInWithGoogle} style={{ background: C.orangeL, border: `1.5px solid ${C.orange}`, borderRadius: 8, padding: "4px 8px", fontSize: 10, color: C.orange, cursor: "pointer", fontWeight: 600 }}>Sign in</button>
-          ) : null}
-        </div>
-      </div>
-      <div style={{ background: C.card, borderRadius: 14, padding: 10, border: `1.5px solid ${C.border}`, marginBottom: 12 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: C.brownM }}>👥 Eating today: {eatCount}</span>
-          <button onClick={() => { setServings(eatCount); setGrocery(genGrocery(plan, eatCount)); }} style={{ fontSize: 10, color: C.orange, fontWeight: 600, background: C.orangeL, border: "none", borderRadius: 6, padding: "3px 8px", cursor: "pointer" }}>Update portions</button>
-        </div>
-        <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-          {members.map((m, i) => <button key={m.id} onClick={() => setEatingToday(p => ({ ...p, [m.id]: !p[m.id] }))}
-            style={{ padding: "4px 8px", borderRadius: 8, border: eatingToday[m.id] ? `1.5px solid ${C.green}` : `1.5px solid ${C.border}`, background: eatingToday[m.id] ? "#E8F5E9" : C.card, fontSize: 11, fontWeight: 600, cursor: "pointer", color: eatingToday[m.id] ? C.green : C.brownL }}>
-            {["👩", "👨", "👴", "👵", "👦", "👧", "👶", "🧑"][i % 8]} {m.name || `P${i + 1}`}
-          </button>)}
-        </div>
-      </div>
-      {todayFest && <div style={{ background: todayFest.type === "fast" ? "#FFF3E0" : "#E8F5E9", borderRadius: 12, padding: "8px 12px", marginBottom: 12, border: todayFest.type === "fast" ? "1.5px solid #FFB74D" : "1.5px solid #81C784", fontSize: 12, fontWeight: 600, color: C.brown }}>
-        {todayFest.type === "fast" ? "🪔" : "🎉"} {todayFest.name}
-      </div>}
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        {MT.map(mt => <MealCard key={mt} meal={todayPlan?.[mt]} ds={todayDs} mt={mt} />)}
-      </div>
-      {hasBaby && <div style={{ marginTop: 12, background: "linear-gradient(135deg,#F3E5F5,#E1BEE7)", borderRadius: 14, padding: 12, border: "1.5px solid #CE93D8", fontSize: 12, color: "#6A1B9A", lineHeight: 1.5 }}>
-        <b>👶 Baby Meals:</b> 🌅 Ragi porridge + banana · ☀️ Khichdi mash · 🌙 Curd rice + steamed veggies
-      </div>}
-      <div style={{ marginTop: 12, background: C.card, borderRadius: 14, padding: 12, border: `1.5px solid ${C.border}` }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: C.brownM, marginBottom: 6 }}>📊 Today's Nutrition</div>
-        <div style={{ display: "flex", gap: 4 }}>
-          {[{ l: "Cal", v: weekMacros.days[todayDs]?.cal || 0, c: "#FF6F00" }, { l: "Protein", v: weekMacros.days[todayDs]?.p || 0, c: "#2E7D32", u: "g" }, { l: "Carbs", v: weekMacros.days[todayDs]?.c || 0, c: "#1565C0", u: "g" }, { l: "Fiber", v: weekMacros.days[todayDs]?.fb || 0, c: "#6A1B9A", u: "g" }].map(x => (
-            <div key={x.l} style={{ flex: 1, textAlign: "center", background: "#F8F4EE", borderRadius: 8, padding: "6px 2px" }}>
-              <div style={{ fontWeight: 800, fontSize: 15, color: x.c, fontFamily: "'Outfit'" }}>{x.v}{x.u || ""}</div>
-              <div style={{ fontSize: 9, color: C.brownL }}>{x.l}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <button onClick={regen} style={{ marginTop: 14, width: "100%", background: `linear-gradient(135deg,${C.orange},#E8913A)`, color: "white", border: "none", borderRadius: 12, padding: "13px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Outfit'" }}>🔄 Regenerate Week</button>
-    </div>
-  );
-
-  const WeekScreen = () => (
-    <div style={{ padding: "14px 14px 100px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-        <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: 0 }}>Week Plan</h2>
-        <div style={{ display: "flex", gap: 4 }}>
-          <button onClick={shareWA} style={{ background: "#25D366", border: "none", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer", color: "white" }}>💬 Share</button>
-          <button onClick={regen} style={{ background: C.orangeL, border: "none", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer", color: C.orange }}>🔄 New</button>
-        </div>
-      </div>
-      {weekDates.map((date, idx) => {
-        const ds = fmtD(date), dp = plan[ds], fest = getFest(ds), isT = ds === today;
-        return (<div key={ds} style={{ background: isT ? C.orangeL : C.card, borderRadius: 14, padding: 10, border: isT ? `2px solid ${C.orange}` : `1.5px solid ${C.border}`, marginBottom: 10 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-            <div><span style={{ fontFamily: "'Outfit'", fontWeight: 700, color: C.brown, fontSize: 14 }}>{FDAYS[idx]}</span><span style={{ fontSize: 10, color: C.brownL, marginLeft: 4 }}>{date.getDate()}/{date.getMonth() + 1}</span>{isT && <span style={{ fontSize: 8, marginLeft: 4, background: C.orange, color: "white", padding: "1px 5px", borderRadius: 4, fontWeight: 700 }}>TODAY</span>}</div>
-            {fest && <span style={{ fontSize: 9, padding: "2px 6px", borderRadius: 5, background: fest.type === "fast" ? "#FFF3E0" : "#E8F5E9", color: fest.type === "fast" ? "#E65100" : "#2E7D32", fontWeight: 700 }}>{fest.name}</span>}
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            {MT.map(mt => dp?.[mt] && <div key={mt} style={{ display: "flex", gap: 5, alignItems: "center" }}>
-              <span style={{ fontSize: 12, width: 18 }}>{MI[mt]}</span>
-              <div style={{ flex: 1 }}><MealCard meal={dp[mt]} ds={ds} mt={mt} compact /></div>
-              <button onClick={() => setSwapT({ ds, mt })} style={{ background: "#F5EDE0", border: "none", borderRadius: 6, width: 24, height: 24, cursor: "pointer", fontSize: 10 }}>🔄</button>
-            </div>)}
-          </div>
-        </div>);
-      })}
-    </div>
-  );
-
-  const GroceryScreen = () => {
-    if (!grocery) return null;
-    const total = Object.values(grocery).flat().length;
-    const checked = Object.values(grocCheck).filter(Boolean).length;
-    return (
-      <div style={{ padding: "14px 14px 100px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
-          <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: 0 }}>Grocery</h2>
-          <button onClick={shareGrocWA} style={{ background: "#25D366", border: "none", borderRadius: 8, padding: "6px 10px", fontSize: 11, fontWeight: 600, cursor: "pointer", color: "white" }}>💬 Share (unchecked only)</button>
-        </div>
-        <p style={{ fontSize: 11, color: C.brownL, margin: "2px 0 10px" }}>{servings} servings · {checked}/{total} have at home</p>
-        <div style={{ display: "flex", gap: 6, marginBottom: 12, alignItems: "center" }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: C.brownM }}>Servings:</span>
-          <select value={servings} onChange={e => { setServings(+e.target.value); setGrocery(genGrocery(plan, +e.target.value)); }}
-            style={{ padding: "4px 8px", borderRadius: 6, border: `1.5px solid ${C.border}`, fontSize: 12, fontWeight: 600, color: C.orange, background: C.card }}>
-            {[2, 3, 4, 5, 6, 7, 8, 10].map(n => <option key={n} value={n}>{n}</option>)}
-          </select>
-        </div>
-        <div style={{ width: "100%", height: 4, borderRadius: 2, background: C.border, marginBottom: 14, overflow: "hidden" }}>
-          <div style={{ width: `${total ? (checked / total) * 100 : 0}%`, height: "100%", background: C.green, borderRadius: 2, transition: "0.3s" }} />
-        </div>
-        {Object.entries(grocery).map(([cat, items]) => {
-          if (!items.length) return null;
-          return (<div key={cat} style={{ marginBottom: 12 }}>
-            <h3 style={{ fontFamily: "'Outfit'", fontSize: 13, fontWeight: 700, color: C.brownM, margin: "0 0 4px", padding: "4px 0", borderBottom: `1px solid ${C.border}` }}>{cat}</h3>
-            {items.map(item => (
-              <label key={item.name} onClick={() => setGrocCheck(p => ({ ...p, [item.name]: !p[item.name] }))}
-                style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 8px", borderRadius: 6, cursor: "pointer", background: grocCheck[item.name] ? "#F5F5F0" : "transparent" }}>
-                <div style={{ width: 18, height: 18, borderRadius: 5, border: grocCheck[item.name] ? "none" : `2px solid #D4C5B0`, background: grocCheck[item.name] ? "#4CAF50" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  {grocCheck[item.name] && <span style={{ color: "white", fontSize: 11 }}>✓</span>}
-                </div>
-                <span style={{ flex: 1, fontSize: 13, color: grocCheck[item.name] ? "#aaa" : C.brown, textDecoration: grocCheck[item.name] ? "line-through" : "none" }}>{item.name}</span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: grocCheck[item.name] ? "#ccc" : C.orange }}>{item.val} {item.unit}</span>
-              </label>
-            ))}
-          </div>);
-        })}
-      </div>
-    );
-  };
-
-  const AnalyticsScreen = () => {
-    const avg = k => Math.round(weekMacros[k] / 7);
-    return (
-      <div style={{ padding: "14px 14px 100px" }}>
-        <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: "0 0 12px" }}>Health Analytics</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 8, marginBottom: 16 }}>
-          {[{ l: "Avg Calories", v: avg("cal"), u: "kcal/day", c: "#FF6F00", em: "🔥" }, { l: "Avg Protein", v: `${avg("p")}g`, u: "/day", c: "#2E7D32", em: "💪" }, { l: "Avg Carbs", v: `${avg("c")}g`, u: "/day", c: "#1565C0", em: "🌾" }, { l: "Avg Fiber", v: `${avg("fb")}g`, u: "/day", c: "#6A1B9A", em: "🥦" }].map(c => (
-            <div key={c.l} style={{ background: C.card, borderRadius: 14, padding: 14, border: `1.5px solid ${C.border}`, textAlign: "center" }}>
-              <div style={{ fontSize: 22, marginBottom: 2 }}>{c.em}</div>
-              <div style={{ fontFamily: "'Outfit'", fontSize: 22, fontWeight: 800, color: c.c }}>{c.v}</div>
-              <div style={{ fontSize: 10, color: C.brownL }}>{c.l}</div>
-            </div>
-          ))}
-        </div>
-        <h3 style={{ fontFamily: "'Outfit'", fontSize: 14, fontWeight: 700, color: C.brown, margin: "0 0 8px" }}>Daily Breakdown</h3>
-        {weekDates.map((d, i) => {
-          const ds = fmtD(d), dm = weekMacros.days[ds] || {};
-          return (<div key={ds} style={{ background: C.card, borderRadius: 10, padding: "8px 10px", border: `1.5px solid ${C.border}`, marginBottom: 6 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-              <span style={{ fontFamily: "'Outfit'", fontWeight: 600, fontSize: 12, color: C.brown }}>{DAYS[i]}</span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#FF6F00" }}>{dm.cal || 0} kcal</span>
-            </div>
-            <div style={{ display: "flex", gap: 3, height: 6 }}>
-              {[{ v: dm.p || 0, max: 60, c: "#4CAF50" }, { v: dm.c || 0, max: 200, c: "#42A5F5" }, { v: dm.f || 0, max: 60, c: "#FF7043" }, { v: dm.fb || 0, max: 25, c: "#AB47BC" }].map((b, j) => (
-                <div key={j} style={{ flex: 1, background: "#F0E6D6", borderRadius: 3, overflow: "hidden" }}><div style={{ width: `${Math.min(100, (b.v / b.max) * 100)}%`, height: "100%", background: b.c, borderRadius: 3 }} /></div>
-              ))}
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 3 }}>
-              {[{ l: "P", v: dm.p, c: "#4CAF50" }, { l: "C", v: dm.c, c: "#42A5F5" }, { l: "F", v: dm.f, c: "#FF7043" }, { l: "Fb", v: dm.fb, c: "#AB47BC" }].map(x => <span key={x.l} style={{ fontSize: 9, color: x.c, fontWeight: 600 }}>{x.l}:{x.v || 0}g</span>)}
-            </div>
-          </div>);
-        })}
-      </div>
-    );
-  };
-
-  const LibraryScreen = () => {
-    const [search, setSearch] = useState("");
-    const [ft, setFt] = useState("all");
-    const filtered = DB.filter(m => {
-      if (ft !== "all" && m.type !== ft) return false;
-      if (search) { const s = search.toLowerCase(); return m.name.toLowerCase().includes(s) || m.tags.some(t => t.includes(s)) || m.region.toLowerCase().includes(s); }
-      return true;
-    });
-    return (
-      <div style={{ padding: "14px 14px 100px" }}>
-        <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: "0 0 8px" }}>Meal Library</h2>
-        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
-          style={{ width: "100%", padding: "9px 12px", borderRadius: 10, border: `2px solid ${C.border}`, fontSize: 13, outline: "none", boxSizing: "border-box", background: C.card, marginBottom: 8 }} />
-        <div style={{ display: "flex", gap: 4, marginBottom: 10, overflowX: "auto" }}>
-          {[{ k: "all", l: "All" }, { k: "breakfast", l: "🌅 B" }, { k: "lunch", l: "☀️ L" }, { k: "dinner", l: "🌙 D" }].map(f => (
-            <button key={f.k} onClick={() => setFt(f.k)} style={{ padding: "5px 10px", borderRadius: 7, border: ft === f.k ? `2px solid ${C.orange}` : `2px solid ${C.border}`, background: ft === f.k ? C.orangeL : C.card, fontSize: 11, fontWeight: 600, cursor: "pointer", color: ft === f.k ? C.orange : C.brownL }}>{f.l}</button>
-          ))}
-        </div>
-        <p style={{ fontSize: 10, color: C.brownL, marginBottom: 8 }}>{filtered.length} meals · 100% Vegetarian</p>
-        {filtered.slice(0, 30).map(meal => {
-          const isD = disliked.includes(meal.id);
-          return (<div key={meal.id} onClick={() => setDetail(meal)} style={{ display: "flex", alignItems: "center", background: C.card, borderRadius: 12, border: `1.5px solid ${C.border}`, overflow: "hidden", cursor: "pointer", marginBottom: 6, opacity: isD ? 0.4 : 1 }}>
-            <FoodImg src={meal.img} name={meal.name} style={{ width: 50, height: 50, flexShrink: 0 }} />
-            <div style={{ flex: 1, padding: "6px 8px", minWidth: 0 }}>
-              <div style={{ fontWeight: 600, color: C.brown, fontSize: 12 }}>{meal.name}</div>
-              <div style={{ fontSize: 10, color: C.brownL }}>{meal.macros.cal}kcal · {meal.macros.p}g P · {meal.effort}m · {meal.region}</div>
-            </div>
-            <div style={{ display: "flex", gap: 2, padding: 4 }}>
-              <button onClick={e => { e.stopPropagation(); setLiked(p => p.includes(meal.id) ? p.filter(x => x !== meal.id) : [...p, meal.id]); }} style={{ width: 26, height: 26, borderRadius: 7, background: liked.includes(meal.id) ? "#E8F5E9" : "transparent", border: "none", cursor: "pointer", fontSize: 13 }}>👍</button>
-              <button onClick={e => { e.stopPropagation(); setDisliked(p => p.includes(meal.id) ? p.filter(x => x !== meal.id) : [...p, meal.id]); }} style={{ width: 26, height: 26, borderRadius: 7, background: isD ? "#FFEBEE" : "transparent", border: "none", cursor: "pointer", fontSize: 13 }}>👎</button>
-            </div>
-          </div>);
-        })}
-      </div>
-    );
-  };
-
-  const ReviewScreen = () => {
-    const all = []; Object.entries(plan).forEach(([ds, dp]) => Object.entries(dp).forEach(([mt, m]) => { if (m) all.push({ ...m, ds, mt }); }));
-    const rated = Object.keys(ratings).length;
-    return (
-      <div style={{ padding: "14px 14px 100px" }}>
-        <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: "0 0 10px" }}>Weekly Review</h2>
-        <div style={{ width: "100%", height: 4, borderRadius: 2, background: C.border, marginBottom: 14, overflow: "hidden" }}><div style={{ width: `${all.length ? (rated / all.length) * 100 : 0}%`, height: "100%", background: C.green, borderRadius: 2 }} /></div>
-        {all.map((m, i) => {
-          const rk = `${m.ds}-${m.mt}-${m.id}`, r = ratings[rk];
-          return (<div key={i} style={{ display: "flex", alignItems: "center", gap: 6, background: C.card, borderRadius: 10, border: `1.5px solid ${C.border}`, overflow: "hidden", marginBottom: 5 }}>
-            <FoodImg src={m.img} name={m.name} style={{ width: 40, height: 40, flexShrink: 0 }} />
-            <div style={{ flex: 1, padding: "4px 0", minWidth: 0 }}>
-              <div style={{ fontSize: 9, color: C.brownL, fontWeight: 600 }}>{MI[m.mt]} {DAYS[weekDates.findIndex(d => fmtD(d) === m.ds)]}</div>
-              <div style={{ fontWeight: 600, color: C.brown, fontSize: 12, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.name}</div>
-            </div>
-            <div style={{ display: "flex", gap: 2, paddingRight: 6 }}>
-              {[{ e: "✅", v: "cooked", bg: "#E8F5E9", bc: "#4CAF50" }, { e: "⏭️", v: "skipped", bg: "#FFEBEE", bc: "#EF5350" }, { e: "🔁", v: "repeat", bg: "#FFF3E0", bc: "#FF9800" }].map(o => (
-                <button key={o.v} onClick={() => setRatings(p => ({ ...p, [rk]: o.v }))} style={{ background: r === o.v ? o.bg : "#F5F0E8", border: r === o.v ? `2px solid ${o.bc}` : "2px solid transparent", borderRadius: 7, padding: "4px 7px", cursor: "pointer", fontSize: 13 }}>{o.e}</button>
-              ))}
-            </div>
-          </div>);
-        })}
-      </div>
-    );
-  };
-
   const nav = [{ k: "today", i: "🏠", l: "Today" }, { k: "week", i: "📅", l: "Week" }, { k: "grocery", i: "🛒", l: "Grocery" }, { k: "analytics", i: "📊", l: "Health" }, { k: "library", i: "📚", l: "Library" }, { k: "review", i: "⭐", l: "Review" }];
 
   return (
@@ -1199,8 +985,8 @@ export default function Bhojan() {
       <style>{fonts}</style>
       <style>{`@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}} *{box-sizing:border-box} ::-webkit-scrollbar{width:0}`}</style>
       <div style={{ animation: "fadeIn 0.3s ease" }}>
-        {screen === "today" && <TodayScreen />}{screen === "week" && <WeekScreen />}{screen === "grocery" && <GroceryScreen />}
-        {screen === "analytics" && <AnalyticsScreen />}{screen === "library" && <LibraryScreen />}{screen === "review" && <ReviewScreen />}
+        {screen === "today" && <TodayScreen C={C} MT={MT} familyName={familyName} syncStatus={syncStatus} user={user} supabase={supabase} signOut={signOut} signInWithGoogle={signInWithGoogle} eatCount={eatCount} members={members} eatingToday={eatingToday} setEatingToday={setEatingToday} setServings={setServings} setGrocery={setGrocery} genGrocery={genGrocery} plan={plan} todayFest={todayFest} todayPlan={todayPlan} todayDs={todayDs} hasBaby={hasBaby} weekMacros={weekMacros} regen={regen} MealCard={MealCard} />}{screen === "week" && <WeekScreen C={C} MT={MT} MI={MI} FDAYS={FDAYS} shareWA={shareWA} regen={regen} weekDates={weekDates} plan={plan} today={today} fmtD={fmtD} getFest={getFest} setSwapT={setSwapT} MealCard={MealCard} />}{screen === "grocery" && <GroceryScreen grocery={grocery} grocCheck={grocCheck} setGrocCheck={setGrocCheck} servings={servings} setServings={setServings} setGrocery={setGrocery} plan={plan} shareGrocWA={shareGrocWA} genGrocery={genGrocery} C={C} />}
+        {screen === "analytics" && <AnalyticsScreen C={C} DAYS={DAYS} weekDates={weekDates} weekMacros={weekMacros} fmtD={fmtD} />}{screen === "library" && <LibraryScreen C={C} DB={DB} disliked={disliked} setDisliked={setDisliked} liked={liked} setLiked={setLiked} setDetail={setDetail} FoodImg={FoodImg} />}{screen === "review" && <ReviewScreen C={C} MI={MI} DAYS={DAYS} weekDates={weekDates} fmtD={fmtD} plan={plan} ratings={ratings} setRatings={setRatings} FoodImg={FoodImg} />}
       </div>
       <SwapModal /><DetailModal />
       <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 480, background: "rgba(255,250,243,0.96)", backdropFilter: "blur(12px)", borderTop: `1px solid ${C.border}`, display: "flex", justifyContent: "space-around", padding: "5px 0 8px", zIndex: 50 }}>
