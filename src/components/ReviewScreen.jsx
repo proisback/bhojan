@@ -21,7 +21,7 @@ export default function ReviewScreen({
           <FoodImg src={m.img} name={m.name} style={{ width: 40, height: 40, flexShrink: 0 }} />
           <div style={{ flex: 1, padding: "4px 0", minWidth: 0 }}>
             <div style={{ fontSize: 9, color: C.brownL, fontWeight: 600 }}>{MI[m.mt]} {DAYS[weekDates.findIndex(d => fmtD(d) === m.ds)]}</div>
-            <div style={{ fontWeight: 600, color: C.brown, fontSize: 12, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.name}</div>
+            <div style={{ fontWeight: 600, color: C.brown, fontSize: 12, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.name}{m.tags.includes("spicy") ? " 🌶️🌶️🌶️" : m.tags.includes("medium") ? " 🌶️🌶️" : m.tags.includes("mild") ? " 🌶️" : ""}</div>
           </div>
           <div style={{ display: "flex", gap: 2, paddingRight: 6 }}>
             {[{ e: "✅", v: "cooked", bg: "#E8F5E9", bc: "#4CAF50" }, { e: "⏭️", v: "skipped", bg: "#FFEBEE", bc: "#EF5350" }, { e: "🔁", v: "repeat", bg: "#FFF3E0", bc: "#FF9800" }].map(o => (

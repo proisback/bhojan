@@ -844,7 +844,7 @@ export default function Bhojan() {
         <div key={meal.id} style={{ animation: "slideIn 0.3s ease", width: "100%", maxWidth: 360, borderRadius: 20, overflow: "hidden", boxShadow: "0 6px 30px rgba(0,0,0,0.08)", border: `1.5px solid ${C.border}` }}>
           <FoodImg src={meal.img} name={meal.name} style={{ width: "100%", height: 180, display: "block" }} />
           <div style={{ padding: 16, background: C.card }}>
-            <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: "0 0 2px" }}>{meal.name}</h2>
+            <h2 style={{ fontFamily: "'Outfit'", fontSize: 20, fontWeight: 800, color: C.brown, margin: "0 0 2px" }}>{meal.name}{meal.tags.includes("spicy") ? " 🌶️🌶️🌶️" : meal.tags.includes("medium") ? " 🌶️🌶️" : meal.tags.includes("mild") ? " 🌶️" : ""}</h2>
             <p style={{ fontSize: 12, color: C.brownL, margin: 0 }}>{meal.region} · {meal.effort} min · {meal.macros.cal} kcal · {meal.macros.p}g protein</p>
             {meal.combo?.length > 0 && <p style={{ fontSize: 11, color: C.brownM, margin: "4px 0 0" }}>+ {meal.combo.join(", ")}</p>}
           </div>
@@ -878,7 +878,7 @@ export default function Bhojan() {
         <FoodImg src={meal.img} name={meal.name} style={{ width: compact ? 52 : 72, height: compact ? 52 : 72, flexShrink: 0 }} />
         <div style={{ flex: 1, padding: compact ? "6px 8px" : "10px 12px", minWidth: 0 }}>
           {!compact && <div style={{ fontSize: 10, color: C.brownL, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>{MI[mt]} {ML[mt]}</div>}
-          <div style={{ fontWeight: 700, color: C.brown, fontSize: compact ? 12 : 14, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{meal.name}</div>
+          <div style={{ fontWeight: 700, color: C.brown, fontSize: compact ? 12 : 14, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{meal.name}{meal.tags.includes("spicy") ? " 🌶️🌶️🌶️" : meal.tags.includes("medium") ? " 🌶️🌶️" : meal.tags.includes("mild") ? " 🌶️" : ""}</div>
           {!compact && meal.combo?.length > 0 && <div style={{ fontSize: 10, color: C.brownL, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>+ {meal.combo.join(", ")}</div>}
           {!compact && <div style={{ display: "flex", gap: 3, marginTop: 4 }}>
             <span style={{ fontSize: 9, padding: "2px 6px", borderRadius: 4, background: "#FFF3E0", color: "#E65100", fontWeight: 600 }}>⏱{meal.effort}m</span>
@@ -907,7 +907,7 @@ export default function Bhojan() {
             <FoodImg src={m.img} name={m.name} style={{ width: "100%", height: 200, display: "block" }} />
             <button onClick={() => setDetail(null)} style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.85)", border: "none", borderRadius: 10, width: 34, height: 34, fontSize: 16, cursor: "pointer" }}>✕</button>
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent,rgba(0,0,0,0.5))", padding: "30px 16px 10px" }}>
-              <h2 style={{ fontFamily: "'Outfit'", fontSize: 22, fontWeight: 800, color: "white", margin: 0, textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}>{m.name}</h2>
+              <h2 style={{ fontFamily: "'Outfit'", fontSize: 22, fontWeight: 800, color: "white", margin: 0, textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}>{m.name}{m.tags.includes("spicy") ? " 🌶️🌶️🌶️" : m.tags.includes("medium") ? " 🌶️🌶️" : m.tags.includes("mild") ? " 🌶️" : ""}</h2>
             </div>
           </div>
           <div style={{ padding: "16px 16px 28px" }}>
@@ -970,7 +970,7 @@ export default function Bhojan() {
             <button key={meal.id} onClick={() => doSwap(meal)} style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", padding: 0, borderRadius: 12, border: `2px solid ${C.border}`, background: C.card, cursor: "pointer", textAlign: "left", overflow: "hidden", marginBottom: 6, transition: "0.2s" }}
               onMouseOver={e => e.currentTarget.style.borderColor = C.orange} onMouseOut={e => e.currentTarget.style.borderColor = C.border}>
               <FoodImg src={meal.img} name={meal.name} style={{ width: 50, height: 50, flexShrink: 0 }} />
-              <div style={{ flex: 1, padding: "6px 0" }}><div style={{ fontWeight: 600, color: C.brown, fontSize: 13 }}>{meal.name}</div><div style={{ fontSize: 10, color: C.brownL }}>{meal.macros.cal}kcal · {meal.macros.p}g P · {meal.effort}m</div></div>
+              <div style={{ flex: 1, padding: "6px 0" }}><div style={{ fontWeight: 600, color: C.brown, fontSize: 13 }}>{meal.name}{meal.tags.includes("spicy") ? " 🌶️🌶️🌶️" : meal.tags.includes("medium") ? " 🌶️🌶️" : meal.tags.includes("mild") ? " 🌶️" : ""}</div><div style={{ fontSize: 10, color: C.brownL }}>{meal.macros.cal}kcal · {meal.macros.p}g P · {meal.effort}m</div></div>
               <span style={{ color: C.orange, fontWeight: 700, fontSize: 11, paddingRight: 10 }}>Pick →</span>
             </button>
           ))}

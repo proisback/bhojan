@@ -33,7 +33,7 @@ export default function LibraryScreen({
         return (<div key={meal.id} onClick={() => setDetail(meal)} style={{ display: "flex", alignItems: "center", background: C.card, borderRadius: 12, border: `1.5px solid ${C.border}`, overflow: "hidden", cursor: "pointer", marginBottom: 6, opacity: isD ? 0.4 : 1 }}>
           <FoodImg src={meal.img} name={meal.name} style={{ width: 50, height: 50, flexShrink: 0 }} />
           <div style={{ flex: 1, padding: "6px 8px", minWidth: 0 }}>
-            <div style={{ fontWeight: 600, color: C.brown, fontSize: 12 }}>{meal.name}</div>
+            <div style={{ fontWeight: 600, color: C.brown, fontSize: 12 }}>{meal.name}{meal.tags.includes("spicy") ? " 🌶️🌶️🌶️" : meal.tags.includes("medium") ? " 🌶️🌶️" : meal.tags.includes("mild") ? " 🌶️" : ""}</div>
             <div style={{ fontSize: 10, color: C.brownL }}>{meal.macros.cal}kcal · {meal.macros.p}g P · {meal.effort}m · {meal.region}</div>
           </div>
           <div style={{ display: "flex", gap: 2, padding: 4 }}>
