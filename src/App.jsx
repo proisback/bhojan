@@ -64,103 +64,103 @@ const DB = [
   {
     id: "b01", name: "Aloo Paratha", type: "breakfast", region: "North", effort: 30, season: "all", combo: ["Curd", "Pickle"], img: IMG.aloo_paratha,
     ingredients: [{ n: "Wheat flour", q: "500g" }, { n: "Potato", q: "400g" }, { n: "Green chili", q: "3 pcs" }, { n: "Coriander leaves", q: "30g" }, { n: "Cumin seeds", q: "5g" }, { n: "Ghee", q: "40g" }, { n: "Salt", q: "10g" }],
-    tags: ["filling", "kid-friendly"], noOG: false, macros: { cal: 320, p: 8, c: 45, f: 13, fb: 4 },
+    tags: ["filling", "kid-friendly", "medium"], noOG: false, macros: { cal: 320, p: 8, c: 45, f: 13, fb: 4 },
     steps: ["Boil, peel and mash potatoes. Mix with chopped chili, coriander, cumin, salt.", "Knead soft dough with wheat flour, water, pinch of salt. Rest 15 min covered.", "Divide dough into balls. Roll, stuff with potato mix, seal edges, roll flat gently.", "Cook on hot tawa with ghee, pressing edges, till golden brown on both sides.", "Serve hot with fresh curd, pickle, and a pat of butter."], similar: ["b12", "b11", "b17"]
   },
   {
     id: "b02", name: "Poha", type: "breakfast", region: "West", effort: 15, season: "all", combo: ["Sev", "Lemon"], img: IMG.poha,
     ingredients: [{ n: "Flattened rice (Poha)", q: "400g" }, { n: "Onion", q: "150g" }, { n: "Peanuts", q: "50g" }, { n: "Curry leaves", q: "10 pcs" }, { n: "Mustard seeds", q: "5g" }, { n: "Turmeric", q: "3g" }, { n: "Green chili", q: "2 pcs" }, { n: "Lemon", q: "1 pc" }, { n: "Sugar", q: "10g" }],
-    tags: ["quick", "light"], noOG: false, macros: { cal: 250, p: 6, c: 40, f: 8, fb: 2 },
+    tags: ["quick", "light", "mild"], noOG: false, macros: { cal: 250, p: 6, c: 40, f: 8, fb: 2 },
     steps: ["Rinse poha gently, drain. Add salt and turmeric, toss.", "Heat oil, splutter mustard seeds, add curry leaves, peanuts, chopped onion.", "Sauté till onion softens. Add green chili.", "Add poha, mix gently on low heat 2-3 min. Add pinch of sugar.", "Squeeze lemon, top with sev and coriander. Serve warm."], similar: ["b03", "b16"]
   },
   {
     id: "b03", name: "Upma", type: "breakfast", region: "South", effort: 20, season: "all", combo: ["Coconut chutney"], img: IMG.upma,
     ingredients: [{ n: "Semolina (Rava)", q: "250g" }, { n: "Onion", q: "100g" }, { n: "Green chili", q: "2 pcs" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Mustard seeds", q: "5g" }, { n: "Cashews", q: "20g" }, { n: "Ghee", q: "20g" }, { n: "Salt", q: "8g" }],
-    tags: ["quick", "filling"], noOG: false, macros: { cal: 280, p: 7, c: 42, f: 9, fb: 3 },
+    tags: ["quick", "filling", "mild"], noOG: false, macros: { cal: 280, p: 7, c: 42, f: 9, fb: 3 },
     steps: ["Dry roast semolina on low flame till fragrant. Set aside.", "Heat ghee, splutter mustard seeds, urad dal, curry leaves, cashews.", "Add chopped onion and green chili, sauté till golden.", "Pour 600ml water, add salt, bring to boil.", "Slowly add semolina stirring continuously. Cook covered 3 min."], similar: ["b02", "b16"]
   },
   {
     id: "b04", name: "Idli Sambhar", type: "breakfast", region: "South", effort: 15, season: "all", combo: ["Coconut chutney"], img: IMG.idli,
     ingredients: [{ n: "Idli batter", q: "500g" }, { n: "Toor dal", q: "150g" }, { n: "Mixed vegetables", q: "200g" }, { n: "Tamarind", q: "20g" }, { n: "Sambhar powder", q: "15g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }],
-    tags: ["healthy", "steamed"], noOG: false, macros: { cal: 220, p: 9, c: 38, f: 4, fb: 5 },
+    tags: ["healthy", "steamed", "medium"], noOG: false, macros: { cal: 220, p: 9, c: 38, f: 4, fb: 5 },
     steps: ["Pour batter into greased idli moulds.", "Steam 10-12 min till toothpick comes clean.", "Cook toor dal soft. Sauté vegetables with sambhar powder.", "Add tamarind water and cooked dal. Simmer 10 min.", "Serve soft idlis with hot sambhar and coconut chutney."], similar: ["b05", "b10"]
   },
   {
     id: "b05", name: "Masala Dosa", type: "breakfast", region: "South", effort: 30, season: "all", combo: ["Chutney", "Sambhar"], img: IMG.dosa,
     ingredients: [{ n: "Dosa batter", q: "500g" }, { n: "Potato", q: "300g" }, { n: "Onion", q: "100g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Turmeric", q: "3g" }, { n: "Oil", q: "30ml" }],
-    tags: ["filling", "weekend"], noOG: false, macros: { cal: 310, p: 8, c: 48, f: 10, fb: 3 },
+    tags: ["filling", "weekend", "medium"], noOG: false, macros: { cal: 310, p: 8, c: 48, f: 10, fb: 3 },
     steps: ["Boil potatoes. Make masala: sauté mustard, curry leaves, onion. Add mashed potato, turmeric.", "Heat flat tawa hot. Pour batter, spread thin circle.", "Drizzle oil around edges. Cook till crisp golden.", "Place potato masala in center. Fold.", "Serve with coconut chutney and sambhar."], similar: ["b04", "b10"]
   },
   {
     id: "b06", name: "Moong Dal Chilla", type: "breakfast", region: "North", effort: 20, season: "all", combo: ["Green chutney", "Curd"], img: IMG.chilla,
     ingredients: [{ n: "Moong dal", q: "250g" }, { n: "Green chili", q: "2 pcs" }, { n: "Ginger", q: "10g" }, { n: "Cumin", q: "5g" }, { n: "Coriander leaves", q: "20g" }, { n: "Salt", q: "8g" }, { n: "Oil", q: "15ml" }],
-    tags: ["protein", "healthy"], noOG: false, macros: { cal: 200, p: 14, c: 28, f: 4, fb: 6 },
+    tags: ["protein", "healthy", "medium"], noOG: false, macros: { cal: 200, p: 14, c: 28, f: 4, fb: 6 },
     steps: ["Soak moong dal 4 hours. Grind smooth with chili, ginger, water.", "Add cumin, coriander, salt. Pouring consistency.", "Heat non-stick tawa. Spread thin like dosa.", "Cook till bottom sets. Flip, cook other side.", "Serve with green chutney and curd."], similar: ["b07", "b14"]
   },
   {
     id: "b07", name: "Besan Chilla", type: "breakfast", region: "North", effort: 15, season: "all", combo: ["Green chutney"], img: IMG.chilla,
     ingredients: [{ n: "Besan (gram flour)", q: "200g" }, { n: "Onion", q: "80g" }, { n: "Tomato", q: "80g" }, { n: "Green chili", q: "2 pcs" }, { n: "Coriander leaves", q: "15g" }, { n: "Turmeric", q: "3g" }, { n: "Salt", q: "8g" }],
-    tags: ["quick", "protein"], noOG: false, macros: { cal: 230, p: 12, c: 30, f: 7, fb: 5 },
+    tags: ["quick", "protein", "medium"], noOG: false, macros: { cal: 230, p: 12, c: 30, f: 7, fb: 5 },
     steps: ["Mix besan with water to smooth batter. Add chopped vegetables.", "Add turmeric, salt, coriander.", "Pour on hot tawa, spread thin. Cook medium heat.", "Flip when golden. Cook other side.", "Serve with green chutney."], similar: ["b06", "b14"]
   },
   {
     id: "b08", name: "Sabudana Khichdi", type: "breakfast", region: "West", effort: 20, season: "all", combo: ["Curd"], img: IMG.sabudana,
     ingredients: [{ n: "Sabudana (sago)", q: "250g" }, { n: "Peanuts", q: "60g" }, { n: "Potato", q: "200g" }, { n: "Green chili", q: "2 pcs" }, { n: "Cumin", q: "5g" }, { n: "Rock salt", q: "8g" }, { n: "Ghee", q: "20g" }, { n: "Lemon", q: "1 pc" }],
-    tags: ["fasting", "filling"], noOG: true, macros: { cal: 340, p: 7, c: 55, f: 11, fb: 2 },
+    tags: ["fasting", "filling", "mild"], noOG: true, macros: { cal: 340, p: 7, c: 55, f: 11, fb: 2 },
     steps: ["Soak sabudana overnight. Drain completely.", "Heat ghee, cumin, chili, cubed potato. Cook till soft.", "Add crushed roasted peanuts.", "Add sabudana, rock salt. Toss gently 5 min.", "Squeeze lemon. Serve with curd."], similar: ["b21"]
   },
   {
     id: "b09", name: "Methi Thepla", type: "breakfast", region: "West", effort: 25, season: "winter", combo: ["Curd", "Pickle", "Chai"], img: IMG.thepla,
     ingredients: [{ n: "Wheat flour", q: "300g" }, { n: "Besan", q: "50g" }, { n: "Fenugreek leaves", q: "100g" }, { n: "Yogurt", q: "60g" }, { n: "Turmeric", q: "3g" }, { n: "Chili powder", q: "5g" }, { n: "Oil", q: "20ml" }, { n: "Salt", q: "8g" }],
-    tags: ["healthy", "travel"], noOG: false, macros: { cal: 260, p: 9, c: 38, f: 8, fb: 4 },
+    tags: ["healthy", "travel", "medium"], noOG: false, macros: { cal: 260, p: 9, c: 38, f: 8, fb: 4 },
     steps: ["Wash and chop methi leaves fine.", "Mix flour, besan, methi, turmeric, chili, salt, yogurt.", "Knead firm dough. Rest 10 min.", "Roll thin, cook on tawa with oil both sides.", "Serve with curd and pickle."], similar: ["b01", "b17"]
   },
   {
     id: "b10", name: "Rava Dosa", type: "breakfast", region: "South", effort: 15, season: "all", combo: ["Chutney"], img: IMG.dosa,
     ingredients: [{ n: "Semolina", q: "150g" }, { n: "Rice flour", q: "100g" }, { n: "Maida", q: "50g" }, { n: "Cumin", q: "5g" }, { n: "Black pepper", q: "3g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Salt", q: "8g" }],
-    tags: ["quick", "crispy"], noOG: false, macros: { cal: 240, p: 5, c: 38, f: 8, fb: 2 },
+    tags: ["quick", "crispy", "medium"], noOG: false, macros: { cal: 240, p: 5, c: 38, f: 8, fb: 2 },
     steps: ["Mix semolina, rice flour, maida with water. Add seasoning.", "No fermentation needed.", "Heat tawa very hot. Pour from edges to center.", "Drizzle oil. Cook high heat till crisp.", "Fold and serve with chutney."], similar: ["b05", "b04"]
   },
   {
     id: "b11", name: "Mooli Paratha", type: "breakfast", region: "North", effort: 35, season: "winter", combo: ["Butter", "Curd"], img: IMG.aloo_paratha,
     ingredients: [{ n: "Wheat flour", q: "400g" }, { n: "White radish", q: "400g" }, { n: "Green chili", q: "3 pcs" }, { n: "Coriander", q: "20g" }, { n: "Ajwain", q: "5g" }, { n: "Ghee", q: "40g" }, { n: "Salt", q: "10g" }],
-    tags: ["filling", "seasonal"], noOG: false, macros: { cal: 300, p: 7, c: 42, f: 12, fb: 4 },
+    tags: ["filling", "seasonal", "medium"], noOG: false, macros: { cal: 300, p: 7, c: 42, f: 12, fb: 4 },
     steps: ["Grate mooli, squeeze water. Save water for dough.", "Mix mooli with chili, coriander, ajwain, salt.", "Knead dough using mooli water.", "Stuff and roll. Cook on tawa with ghee.", "Serve with butter and curd."], similar: ["b01", "b12"]
   },
   {
     id: "b12", name: "Paneer Paratha", type: "breakfast", region: "North", effort: 30, season: "all", combo: ["Curd", "Pickle"], img: IMG.aloo_paratha,
     ingredients: [{ n: "Wheat flour", q: "400g" }, { n: "Paneer", q: "250g" }, { n: "Green chili", q: "2 pcs" }, { n: "Coriander", q: "20g" }, { n: "Cumin", q: "5g" }, { n: "Ghee", q: "40g" }, { n: "Salt", q: "8g" }],
-    tags: ["protein", "filling"], noOG: false, macros: { cal: 350, p: 14, c: 40, f: 16, fb: 3 },
+    tags: ["protein", "filling", "mild"], noOG: false, macros: { cal: 350, p: 14, c: 40, f: 16, fb: 3 },
     steps: ["Grate paneer. Mix with chili, coriander, cumin, salt.", "Knead soft dough.", "Stuff and roll gently.", "Cook with ghee till golden.", "Serve with curd and pickle."], similar: ["b01", "b11"]
   },
   {
     id: "b14", name: "Oats Uttapam", type: "breakfast", region: "South", effort: 15, season: "all", combo: ["Chutney"], img: IMG.uttapam,
     ingredients: [{ n: "Oats", q: "200g" }, { n: "Semolina", q: "50g" }, { n: "Curd", q: "100g" }, { n: "Onion", q: "50g" }, { n: "Tomato", q: "50g" }, { n: "Capsicum", q: "30g" }, { n: "Salt", q: "8g" }],
-    tags: ["healthy", "quick"], noOG: false, macros: { cal: 210, p: 8, c: 32, f: 6, fb: 4 },
+    tags: ["healthy", "quick", "mild"], noOG: false, macros: { cal: 210, p: 8, c: 32, f: 6, fb: 4 },
     steps: ["Grind oats. Mix with semolina, curd, water.", "Rest 10 min.", "Pour thick on tawa. Top with chopped vegetables.", "Cook covered. Flip and cook.", "Serve with chutney."], similar: ["b06", "b07"]
   },
   {
     id: "b15", name: "Puri Aloo", type: "breakfast", region: "North", effort: 30, season: "all", combo: ["Pickle"], img: IMG.puri,
     ingredients: [{ n: "Wheat flour", q: "300g" }, { n: "Potato", q: "400g" }, { n: "Onion", q: "100g" }, { n: "Cumin", q: "5g" }, { n: "Turmeric", q: "3g" }, { n: "Oil", q: "500ml" }, { n: "Salt", q: "10g" }],
-    tags: ["weekend", "festive"], noOG: false, macros: { cal: 400, p: 8, c: 52, f: 18, fb: 4 },
+    tags: ["weekend", "festive", "medium"], noOG: false, macros: { cal: 400, p: 8, c: 52, f: 18, fb: 4 },
     steps: ["Knead stiff dough. Rest 15 min.", "Cook aloo sabzi with cumin, turmeric.", "Roll small puris. Deep fry till puffed golden.", "Drain.", "Serve with aloo sabzi."], similar: ["b01", "b13"]
   },
   {
     id: "b16", name: "Vermicelli Upma", type: "breakfast", region: "South", effort: 15, season: "all", combo: ["Chutney"], img: IMG.upma,
     ingredients: [{ n: "Vermicelli", q: "250g" }, { n: "Peanuts", q: "30g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Mustard seeds", q: "5g" }, { n: "Green chili", q: "2 pcs" }, { n: "Onion", q: "80g" }, { n: "Lemon", q: "1 pc" }, { n: "Salt", q: "8g" }],
-    tags: ["quick", "kid-friendly"], noOG: false, macros: { cal: 260, p: 7, c: 42, f: 7, fb: 2 },
+    tags: ["quick", "kid-friendly", "mild"], noOG: false, macros: { cal: 260, p: 7, c: 42, f: 7, fb: 2 },
     steps: ["Dry roast vermicelli golden.", "Splutter mustard, curry leaves, peanuts, onion.", "Add water and salt. Boil.", "Add vermicelli. Cover, cook 3 min.", "Squeeze lemon. Serve."], similar: ["b02", "b03"]
   },
   {
     id: "b17", name: "Gobhi Paratha", type: "breakfast", region: "North", effort: 30, season: "winter", combo: ["Butter", "Curd"], img: IMG.aloo_paratha,
     ingredients: [{ n: "Wheat flour", q: "400g" }, { n: "Cauliflower", q: "350g" }, { n: "Green chili", q: "2 pcs" }, { n: "Amchur", q: "5g" }, { n: "Ghee", q: "40g" }, { n: "Salt", q: "10g" }],
-    tags: ["seasonal", "filling"], noOG: false, macros: { cal: 290, p: 8, c: 40, f: 11, fb: 4 },
+    tags: ["seasonal", "filling", "medium"], noOG: false, macros: { cal: 290, p: 8, c: 40, f: 11, fb: 4 },
     steps: ["Grate cauliflower fine, squeeze water.", "Mix with chili, amchur, salt.", "Knead dough. Stuff and roll.", "Cook with ghee till golden.", "Serve with butter and curd."], similar: ["b01", "b11"]
   },
   {
     id: "b18", name: "Dhokla", type: "breakfast", region: "West", effort: 25, season: "all", combo: ["Green chutney"], img: IMG.dhokla,
     ingredients: [{ n: "Besan", q: "250g" }, { n: "Curd", q: "100g" }, { n: "Eno fruit salt", q: "5g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Sugar", q: "15g" }, { n: "Lemon", q: "1 pc" }, { n: "Salt", q: "8g" }],
-    tags: ["steamed", "light"], noOG: false, macros: { cal: 180, p: 10, c: 26, f: 4, fb: 3 },
+    tags: ["steamed", "light", "mild"], noOG: false, macros: { cal: 180, p: 10, c: 26, f: 4, fb: 3 },
     steps: ["Mix besan, curd, water, salt, turmeric, sugar.", "Add Eno and lemon juice just before steaming.", "Steam 15 min in greased plate.", "Make tadka: mustard, curry leaves, chili, water, sugar.", "Cut and pour tadka. Serve with chutney."], similar: ["b06", "b07"]
   },
   {
@@ -172,13 +172,13 @@ const DB = [
   {
     id: "b21", name: "Kuttu Puri + Aloo", type: "breakfast", region: "North", effort: 25, season: "all", combo: ["Curd"], img: IMG.puri,
     ingredients: [{ n: "Buckwheat flour", q: "200g" }, { n: "Potato", q: "300g" }, { n: "Rock salt", q: "8g" }, { n: "Cumin", q: "5g" }, { n: "Green chili", q: "2 pcs" }, { n: "Ghee", q: "30g" }],
-    tags: ["fasting"], noOG: true, macros: { cal: 340, p: 7, c: 48, f: 14, fb: 3 },
+    tags: ["fasting", "mild"], noOG: true, macros: { cal: 340, p: 7, c: 48, f: 14, fb: 3 },
     steps: ["Mix buckwheat flour with mashed potato, rock salt. Knead.", "Make aloo sabzi with ghee, cumin, chili, rock salt.", "Roll puris. Fry in ghee.", "Drain.", "Serve with aloo and curd."], similar: ["b08"]
   },
   {
     id: "b22", name: "Curd Rice", type: "breakfast", region: "South", effort: 10, season: "summer", combo: ["Pickle", "Papad"], img: IMG.pulao,
     ingredients: [{ n: "Cooked rice", q: "400g" }, { n: "Curd", q: "300g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Pomegranate", q: "30g" }, { n: "Salt", q: "8g" }],
-    tags: ["cooling", "quick"], noOG: true, macros: { cal: 280, p: 8, c: 48, f: 6, fb: 2 },
+    tags: ["cooling", "quick", "mild"], noOG: true, macros: { cal: 280, p: 8, c: 48, f: 6, fb: 2 },
     steps: ["Mix warm rice with curd and salt.", "Make tadka: mustard, curry leaves, green chili.", "Pour over curd rice. Mix.", "Garnish with pomegranate.", "Serve with pickle and papad."], similar: ["b04"]
   },
 
@@ -186,91 +186,91 @@ const DB = [
   {
     id: "l01", name: "Rajma Chawal", type: "lunch", region: "North", effort: 45, season: "all", combo: ["Salad", "Papad"], img: IMG.rajma,
     ingredients: [{ n: "Rajma (kidney beans)", q: "300g" }, { n: "Onion", q: "200g" }, { n: "Tomato", q: "300g" }, { n: "Ginger-garlic paste", q: "20g" }, { n: "Rajma masala", q: "15g" }, { n: "Basmati rice", q: "400g" }, { n: "Oil", q: "30ml" }, { n: "Salt", q: "10g" }],
-    tags: ["protein", "filling", "kid-friendly"], noOG: false, macros: { cal: 420, p: 16, c: 62, f: 10, fb: 12 },
+    tags: ["protein", "filling", "kid-friendly", "medium"], noOG: false, macros: { cal: 420, p: 16, c: 62, f: 10, fb: 12 },
     steps: ["Soak rajma overnight. Pressure cook 4-5 whistles.", "Sauté onion till golden. Add ginger-garlic, tomato puree.", "Cook till oil separates. Add masala.", "Add rajma with water. Simmer 20 min.", "Serve over steamed rice."], similar: ["l14", "l03"]
   },
   {
     id: "l02", name: "Dal Makhani + Roti", type: "lunch", region: "North", effort: 60, season: "winter", combo: ["Roti", "Raita"], img: IMG.dal_makhani,
     ingredients: [{ n: "Urad dal", q: "200g" }, { n: "Rajma", q: "50g" }, { n: "Butter", q: "60g" }, { n: "Cream", q: "60ml" }, { n: "Tomato", q: "200g" }, { n: "Ginger-garlic paste", q: "15g" }, { n: "Kasuri methi", q: "5g" }, { n: "Wheat flour", q: "400g" }, { n: "Salt", q: "10g" }],
-    tags: ["rich", "weekend"], noOG: false, macros: { cal: 450, p: 15, c: 48, f: 22, fb: 8 },
+    tags: ["rich", "weekend", "medium"], noOG: false, macros: { cal: 450, p: 15, c: 48, f: 22, fb: 8 },
     steps: ["Soak dal overnight. Pressure cook very soft.", "Sauté ginger-garlic and tomato puree in butter.", "Add spices and dal. Simmer 40 min on low.", "Add cream and kasuri methi.", "Serve with hot rotis."], similar: ["l01", "l12"]
   },
   {
     id: "l03", name: "Chole Bhature", type: "lunch", region: "North", effort: 60, season: "all", combo: ["Lassi", "Pickle"], img: IMG.chole,
     ingredients: [{ n: "Chickpeas", q: "300g" }, { n: "Onion", q: "200g" }, { n: "Tomato", q: "200g" }, { n: "Maida", q: "300g" }, { n: "Yogurt", q: "60g" }, { n: "Chole masala", q: "20g" }, { n: "Tea bag", q: "1 pc" }, { n: "Oil", q: "500ml" }],
-    tags: ["weekend", "festive"], noOG: false, macros: { cal: 520, p: 16, c: 60, f: 24, fb: 10 },
+    tags: ["weekend", "festive", "spicy"], noOG: false, macros: { cal: 520, p: 16, c: 60, f: 24, fb: 10 },
     steps: ["Soak chickpeas overnight. Boil with tea bag for colour.", "Make masala gravy with onion, tomato, spices.", "Add chickpeas. Simmer thick.", "Knead bhatura dough with maida, yogurt. Rest and fry.", "Serve with pickled onion and lassi."], similar: ["l01", "l14"]
   },
   {
     id: "l04", name: "Kadhi Chawal", type: "lunch", region: "North", effort: 30, season: "monsoon", combo: ["Rice", "Papad"], img: IMG.kadhi,
     ingredients: [{ n: "Besan", q: "100g" }, { n: "Curd", q: "400g" }, { n: "Onion", q: "80g" }, { n: "Fenugreek seeds", q: "5g" }, { n: "Turmeric", q: "3g" }, { n: "Basmati rice", q: "400g" }, { n: "Ghee", q: "20g" }, { n: "Salt", q: "10g" }],
-    tags: ["comfort", "monsoon"], noOG: false, macros: { cal: 350, p: 12, c: 50, f: 11, fb: 3 },
+    tags: ["comfort", "monsoon", "mild"], noOG: false, macros: { cal: 350, p: 12, c: 50, f: 11, fb: 3 },
     steps: ["Whisk besan + curd + water smooth.", "Make and fry pakoras.", "Make tadka, pour besan mix. Stir. Simmer 20 min.", "Add pakoras. Cook 5 min.", "Serve with steamed rice."], similar: ["l19", "l12"]
   },
   {
     id: "l05", name: "Palak Paneer + Rice", type: "lunch", region: "North", effort: 30, season: "winter", combo: ["Rice", "Raita"], img: IMG.palak_paneer,
     ingredients: [{ n: "Paneer", q: "300g" }, { n: "Spinach", q: "500g" }, { n: "Onion", q: "100g" }, { n: "Tomato", q: "100g" }, { n: "Cream", q: "40ml" }, { n: "Ginger", q: "10g" }, { n: "Garam masala", q: "5g" }, { n: "Rice", q: "400g" }, { n: "Salt", q: "10g" }],
-    tags: ["healthy", "iron-rich"], noOG: false, macros: { cal: 380, p: 20, c: 28, f: 22, fb: 6 },
+    tags: ["healthy", "iron-rich", "medium"], noOG: false, macros: { cal: 380, p: 20, c: 28, f: 22, fb: 6 },
     steps: ["Blanch spinach. Blend.", "Sauté onion, ginger, tomato. Blend.", "Cook paste with spices. Add spinach puree.", "Add paneer. Cook 5 min.", "Finish with cream. Serve with rice."], similar: ["l08", "l15"]
   },
   {
     id: "l06", name: "Sambhar Rice", type: "lunch", region: "South", effort: 30, season: "all", combo: ["Papad", "Pickle"], img: IMG.sambar_rice,
     ingredients: [{ n: "Toor dal", q: "200g" }, { n: "Mixed vegetables", q: "300g" }, { n: "Tamarind", q: "20g" }, { n: "Sambhar powder", q: "15g" }, { n: "Mustard seeds", q: "5g" }, { n: "Rice", q: "400g" }, { n: "Salt", q: "10g" }],
-    tags: ["healthy", "everyday"], noOG: false, macros: { cal: 380, p: 14, c: 60, f: 8, fb: 10 },
+    tags: ["healthy", "everyday", "medium"], noOG: false, macros: { cal: 380, p: 14, c: 60, f: 8, fb: 10 },
     steps: ["Cook toor dal soft. Mash.", "Cook vegetables separately.", "Make tadka. Add tamarind, sambhar powder, vegetables, dal.", "Simmer 10 min.", "Serve over rice."], similar: ["l23", "l04"]
   },
   {
     id: "l08", name: "Paneer Butter Masala + Naan", type: "lunch", region: "North", effort: 35, season: "all", combo: ["Naan", "Raita"], img: IMG.paneer_butter,
     ingredients: [{ n: "Paneer", q: "300g" }, { n: "Tomato", q: "300g" }, { n: "Cashew", q: "30g" }, { n: "Butter", q: "60g" }, { n: "Cream", q: "60ml" }, { n: "Onion", q: "100g" }, { n: "Kasuri methi", q: "5g" }, { n: "Naan", q: "6 pcs" }, { n: "Salt", q: "10g" }],
-    tags: ["rich", "kid-friendly"], noOG: false, macros: { cal: 450, p: 18, c: 22, f: 32, fb: 3 },
+    tags: ["rich", "kid-friendly", "medium"], noOG: false, macros: { cal: 450, p: 18, c: 22, f: 32, fb: 3 },
     steps: ["Blend tomato, onion, cashew smooth.", "Cook paste in butter till thick.", "Add spices, sugar, salt.", "Add paneer and cream. Simmer 5 min.", "Finish with kasuri methi. Serve with naan."], similar: ["l05", "l15"]
   },
   {
     id: "l10", name: "Pav Bhaji", type: "lunch", region: "West", effort: 35, season: "all", combo: ["Pav", "Onion", "Lemon"], img: IMG.pav_bhaji,
     ingredients: [{ n: "Potato", q: "400g" }, { n: "Cauliflower", q: "200g" }, { n: "Carrot", q: "100g" }, { n: "Peas", q: "100g" }, { n: "Tomato", q: "200g" }, { n: "Butter", q: "80g" }, { n: "Pav bhaji masala", q: "20g" }, { n: "Pav buns", q: "12 pcs" }, { n: "Onion", q: "100g" }, { n: "Lemon", q: "2 pcs" }],
-    tags: ["street-food", "kid-friendly"], noOG: false, macros: { cal: 420, p: 10, c: 58, f: 16, fb: 6 },
+    tags: ["street-food", "kid-friendly", "medium"], noOG: false, macros: { cal: 420, p: 10, c: 58, f: 16, fb: 6 },
     steps: ["Boil and mash all vegetables.", "Sauté onion, tomato in butter.", "Add mashed vegetables, masala. Mash together.", "Cook 10 min, adding water.", "Toast pav. Serve with butter, onion, lemon."], similar: ["l03"]
   },
   {
     id: "l12", name: "Dal Tadka + Jeera Rice", type: "lunch", region: "North", effort: 25, season: "all", combo: ["Papad", "Salad"], img: IMG.dal_fry,
     ingredients: [{ n: "Toor dal", q: "250g" }, { n: "Onion", q: "100g" }, { n: "Tomato", q: "150g" }, { n: "Ghee", q: "30g" }, { n: "Cumin", q: "5g" }, { n: "Garlic", q: "10g" }, { n: "Basmati rice", q: "400g" }, { n: "Turmeric", q: "3g" }, { n: "Salt", q: "10g" }],
-    tags: ["everyday", "comfort"], noOG: false, macros: { cal: 370, p: 14, c: 56, f: 10, fb: 8 },
+    tags: ["everyday", "comfort", "mild"], noOG: false, macros: { cal: 370, p: 14, c: 56, f: 10, fb: 8 },
     steps: ["Pressure cook dal with turmeric. Mash.", "Make jeera rice separately.", "Make sizzling tadka with ghee, cumin, garlic, onion, tomato.", "Pour over dal.", "Serve with jeera rice and papad."], similar: ["l01", "l04"]
   },
   {
     id: "l13", name: "Veg Biryani", type: "lunch", region: "South", effort: 45, season: "all", combo: ["Raita"], img: IMG.biryani,
     ingredients: [{ n: "Basmati rice", q: "500g" }, { n: "Mixed vegetables", q: "300g" }, { n: "Onion", q: "250g" }, { n: "Yogurt", q: "100g" }, { n: "Biryani masala", q: "20g" }, { n: "Saffron", q: "1g" }, { n: "Mint leaves", q: "30g" }, { n: "Ghee", q: "40g" }, { n: "Curd", q: "200g" }, { n: "Cucumber", q: "100g" }],
-    tags: ["weekend", "festive"], noOG: false, macros: { cal: 440, p: 10, c: 65, f: 16, fb: 4 },
+    tags: ["weekend", "festive", "medium"], noOG: false, macros: { cal: 440, p: 10, c: 65, f: 16, fb: 4 },
     steps: ["Soak rice. Par-boil 70% done.", "Fry onion slices golden.", "Cook vegetables with yogurt, masala, mint.", "Layer vegetables, rice, fried onions, saffron milk.", "Seal and dum cook 25 min. Serve with raita."], similar: ["l17", "l08"]
   },
   {
     id: "l14", name: "Chana Masala + Rice", type: "lunch", region: "North", effort: 30, season: "all", combo: ["Rice", "Raita"], img: IMG.chole,
     ingredients: [{ n: "Chickpeas", q: "300g" }, { n: "Onion", q: "200g" }, { n: "Tomato", q: "200g" }, { n: "Chole masala", q: "15g" }, { n: "Ginger", q: "10g" }, { n: "Basmati rice", q: "400g" }, { n: "Salt", q: "10g" }],
-    tags: ["protein", "everyday"], noOG: false, macros: { cal: 400, p: 15, c: 60, f: 10, fb: 12 },
+    tags: ["protein", "everyday", "spicy"], noOG: false, macros: { cal: 400, p: 15, c: 60, f: 10, fb: 12 },
     steps: ["Soak and cook chickpeas.", "Sauté onion, ginger, tomato.", "Add masala. Add chickpeas. Simmer.", "Mash a few for thickness.", "Serve with rice and raita."], similar: ["l01", "l03"]
   },
   {
     id: "l17", name: "Veg Pulao + Raita", type: "lunch", region: "North", effort: 25, season: "all", combo: ["Raita", "Papad"], img: IMG.pulao,
     ingredients: [{ n: "Basmati rice", q: "400g" }, { n: "Mixed vegetables", q: "250g" }, { n: "Onion", q: "80g" }, { n: "Cumin", q: "5g" }, { n: "Bay leaf", q: "2 pcs" }, { n: "Whole spices", q: "5g" }, { n: "Ghee", q: "20g" }, { n: "Curd", q: "200g" }, { n: "Cucumber", q: "80g" }, { n: "Salt", q: "10g" }],
-    tags: ["quick", "one-pot"], noOG: false, macros: { cal: 380, p: 9, c: 58, f: 12, fb: 4 },
+    tags: ["quick", "one-pot", "mild"], noOG: false, macros: { cal: 380, p: 9, c: 58, f: 12, fb: 4 },
     steps: ["Soak rice 20 min.", "Sauté whole spices, onion, vegetables in ghee.", "Add rice, salt, water. Cook.", "Make cucumber raita.", "Serve together."], similar: ["l13", "l12"]
   },
   {
     id: "l19", name: "Khichdi + Kadhi", type: "lunch", region: "West", effort: 25, season: "monsoon", combo: ["Papad", "Pickle"], img: IMG.khichdi,
     ingredients: [{ n: "Rice", q: "250g" }, { n: "Moong dal", q: "125g" }, { n: "Turmeric", q: "3g" }, { n: "Ghee", q: "30g" }, { n: "Cumin", q: "5g" }, { n: "Besan", q: "50g" }, { n: "Curd", q: "200g" }, { n: "Salt", q: "10g" }],
-    tags: ["comfort", "healing"], noOG: false, macros: { cal: 340, p: 12, c: 52, f: 9, fb: 5 },
+    tags: ["comfort", "healing", "mild"], noOG: false, macros: { cal: 340, p: 12, c: 52, f: 9, fb: 5 },
     steps: ["Wash rice and dal. Pressure cook soft with turmeric, ghee.", "Make mini kadhi: besan + curd + water. Boil.", "Add tadka to kadhi.", "Top khichdi with ghee.", "Serve with kadhi, papad, pickle."], similar: ["l04", "l12"]
   },
   {
     id: "l23", name: "Rasam Rice", type: "lunch", region: "South", effort: 20, season: "monsoon", combo: ["Papad"], img: IMG.sambar_rice,
     ingredients: [{ n: "Tomato", q: "200g" }, { n: "Tamarind", q: "15g" }, { n: "Pepper", q: "5g" }, { n: "Cumin", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Mustard seeds", q: "5g" }, { n: "Basmati rice", q: "400g" }, { n: "Salt", q: "8g" }],
-    tags: ["light", "healing"], noOG: false, macros: { cal: 280, p: 7, c: 52, f: 5, fb: 3 },
+    tags: ["light", "healing", "medium"], noOG: false, macros: { cal: 280, p: 7, c: 52, f: 5, fb: 3 },
     steps: ["Mash tomato. Add tamarind water, pepper, cumin, salt.", "Boil. Let it froth.", "Make mustard-curry leaf tadka.", "Pour over rasam.", "Serve over rice."], similar: ["l06", "l04"]
   },
   {
     id: "l25", name: "Matar Paneer + Rice", type: "lunch", region: "North", effort: 30, season: "winter", combo: ["Rice", "Raita"], img: IMG.paneer_butter,
     ingredients: [{ n: "Paneer", q: "250g" }, { n: "Green peas", q: "200g" }, { n: "Onion", q: "150g" }, { n: "Tomato", q: "200g" }, { n: "Ginger-garlic paste", q: "15g" }, { n: "Garam masala", q: "5g" }, { n: "Basmati rice", q: "400g" }, { n: "Curd", q: "150g" }, { n: "Salt", q: "10g" }],
-    tags: ["everyday", "kid-friendly"], noOG: false, macros: { cal: 400, p: 18, c: 35, f: 21, fb: 5 },
+    tags: ["everyday", "kid-friendly", "medium"], noOG: false, macros: { cal: 400, p: 18, c: 35, f: 21, fb: 5 },
     steps: ["Sauté onion golden. Add ginger-garlic.", "Add tomato puree, spices. Cook thick.", "Add peas, water. Cook 5 min.", "Add paneer. Simmer.", "Serve with rice and raita."], similar: ["l05", "l08"]
   },
 
@@ -278,139 +278,139 @@ const DB = [
   {
     id: "d01", name: "Paneer Tikka Rice Bowl", type: "dinner", region: "North", effort: 30, season: "all", combo: ["Mint chutney"], img: IMG.paneer_tikka,
     ingredients: [{ n: "Paneer", q: "300g" }, { n: "Capsicum", q: "100g" }, { n: "Onion", q: "100g" }, { n: "Yogurt", q: "80g" }, { n: "Tikka masala", q: "15g" }, { n: "Basmati rice", q: "400g" }, { n: "Lemon", q: "1 pc" }, { n: "Salt", q: "10g" }],
-    tags: ["protein", "bowl"], noOG: false, macros: { cal: 420, p: 20, c: 45, f: 18, fb: 3 },
+    tags: ["protein", "bowl", "medium"], noOG: false, macros: { cal: 420, p: 20, c: 45, f: 18, fb: 3 },
     steps: ["Marinate paneer cubes and vegetables in yogurt + tikka masala 20 min.", "Grill or pan-fry till charred.", "Cook aromatic rice with cumin.", "Assemble bowl: rice base, tikka on top, drizzle mint chutney.", "Squeeze lemon. Serve warm."], similar: ["d02", "d16"]
   },
   {
     id: "d02", name: "Veg Biryani (One-Pot)", type: "dinner", region: "South", effort: 40, season: "all", combo: ["Raita"], img: IMG.biryani,
     ingredients: [{ n: "Basmati rice", q: "400g" }, { n: "Mixed vegetables", q: "300g" }, { n: "Onion", q: "200g" }, { n: "Yogurt", q: "80g" }, { n: "Biryani masala", q: "15g" }, { n: "Saffron", q: "1g" }, { n: "Mint", q: "20g" }, { n: "Ghee", q: "30g" }, { n: "Curd", q: "200g" }, { n: "Cucumber", q: "100g" }],
-    tags: ["one-pot", "festive"], noOG: false, macros: { cal: 440, p: 10, c: 62, f: 16, fb: 4 },
+    tags: ["one-pot", "festive", "medium"], noOG: false, macros: { cal: 440, p: 10, c: 62, f: 16, fb: 4 },
     steps: ["Fry sliced onions golden in ghee.", "Cook vegetables with yogurt and masala.", "Layer par-boiled rice and vegetable mixture.", "Top with saffron milk, mint, fried onions. Seal and dum 25 min.", "Serve with cucumber raita."], similar: ["d01", "d06"]
   },
   {
     id: "d03", name: "Masala Dosa Dinner", type: "dinner", region: "South", effort: 25, season: "all", combo: ["Sambhar", "Chutney"], img: IMG.dosa,
     ingredients: [{ n: "Dosa batter", q: "500g" }, { n: "Potato", q: "300g" }, { n: "Onion", q: "100g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Toor dal", q: "150g" }, { n: "Tamarind", q: "15g" }, { n: "Oil", q: "30ml" }],
-    tags: ["south-indian", "light"], noOG: false, macros: { cal: 320, p: 9, c: 48, f: 10, fb: 4 },
+    tags: ["south-indian", "light", "medium"], noOG: false, macros: { cal: 320, p: 9, c: 48, f: 10, fb: 4 },
     steps: ["Make potato masala with mustard, curry leaf, onion.", "Make fresh sambhar with toor dal and vegetables.", "Spread dosa batter thin on hot tawa. Crisp.", "Fill with potato masala.", "Serve with sambhar and coconut chutney."], similar: ["d04", "d11"]
   },
   {
     id: "d04", name: "Uttapam Platter", type: "dinner", region: "South", effort: 20, season: "all", combo: ["Sambhar", "Chutney"], img: IMG.uttapam,
     ingredients: [{ n: "Dosa batter", q: "500g" }, { n: "Onion", q: "80g" }, { n: "Tomato", q: "80g" }, { n: "Capsicum", q: "50g" }, { n: "Carrot (grated)", q: "50g" }, { n: "Toor dal", q: "100g" }, { n: "Oil", q: "20ml" }],
-    tags: ["quick", "light"], noOG: false, macros: { cal: 280, p: 9, c: 42, f: 8, fb: 4 },
+    tags: ["quick", "light", "mild"], noOG: false, macros: { cal: 280, p: 9, c: 42, f: 8, fb: 4 },
     steps: ["Pour thick dosa batter on tawa.", "Top with chopped onion, tomato, capsicum, carrot.", "Cook covered on medium heat.", "Make quick sambhar.", "Serve platter of uttapams with sambhar and chutney."], similar: ["d03", "d11"]
   },
   {
     id: "d05", name: "Veg Khichdi Bowl", type: "dinner", region: "West", effort: 20, season: "monsoon", combo: ["Papad", "Pickle", "Curd"], img: IMG.khichdi,
     ingredients: [{ n: "Rice", q: "250g" }, { n: "Moong dal", q: "125g" }, { n: "Mixed vegetables", q: "200g" }, { n: "Ghee", q: "30g" }, { n: "Turmeric", q: "3g" }, { n: "Cumin", q: "5g" }, { n: "Papad", q: "6 pcs" }, { n: "Curd", q: "200g" }, { n: "Pickle", q: "30g" }],
-    tags: ["comfort", "healing", "bowl"], noOG: true, macros: { cal: 340, p: 12, c: 50, f: 10, fb: 5 },
+    tags: ["comfort", "healing", "bowl", "mild"], noOG: true, macros: { cal: 340, p: 12, c: 50, f: 10, fb: 5 },
     steps: ["Wash rice and dal. Pressure cook with vegetables, turmeric, salt.", "Let it be soft and porridge-like.", "Top with generous ghee.", "Fry papad.", "Serve in bowl with curd and pickle on the side."], similar: ["d10", "d12"]
   },
   {
     id: "d06", name: "Veg Fried Rice + Manchurian", type: "dinner", region: "Fusion", effort: 30, season: "all", combo: [], img: IMG.fried_rice,
     ingredients: [{ n: "Cooked rice (cold)", q: "500g" }, { n: "Cabbage", q: "100g" }, { n: "Carrot", q: "80g" }, { n: "Capsicum", q: "80g" }, { n: "Spring onion", q: "50g" }, { n: "Soy sauce", q: "30ml" }, { n: "Vinegar", q: "15ml" }, { n: "Cornflour", q: "30g" }, { n: "Chili sauce", q: "15ml" }, { n: "Oil", q: "40ml" }],
-    tags: ["kid-friendly", "fusion"], noOG: false, macros: { cal: 400, p: 10, c: 58, f: 14, fb: 4 },
+    tags: ["kid-friendly", "fusion", "medium"], noOG: false, macros: { cal: 400, p: 10, c: 58, f: 14, fb: 4 },
     steps: ["Julienne all vegetables thin.", "Wok on high heat: toss vegetables 2 min.", "Add cold rice, soy sauce, vinegar. Toss vigorously.", "For manchurian: grate cabbage + carrot, mix cornflour, shape balls, fry.", "Make sauce. Toss balls in sauce. Serve with fried rice."], similar: ["d07", "d08"]
   },
   {
     id: "d07", name: "Veg Hakka Noodles", type: "dinner", region: "Fusion", effort: 20, season: "all", combo: ["Manchurian"], img: IMG.noodles,
     ingredients: [{ n: "Hakka noodles", q: "400g" }, { n: "Cabbage", q: "100g" }, { n: "Carrot", q: "80g" }, { n: "Capsicum", q: "80g" }, { n: "Spring onion", q: "50g" }, { n: "Soy sauce", q: "30ml" }, { n: "Vinegar", q: "15ml" }, { n: "Chili sauce", q: "10ml" }, { n: "Oil", q: "30ml" }],
-    tags: ["quick", "kid-friendly", "fusion"], noOG: false, macros: { cal: 350, p: 9, c: 52, f: 12, fb: 4 },
+    tags: ["quick", "kid-friendly", "fusion", "medium"], noOG: false, macros: { cal: 350, p: 9, c: 52, f: 12, fb: 4 },
     steps: ["Boil noodles al dente. Drain, toss with oil.", "Julienne vegetables.", "Wok high heat: vegetables 2 min.", "Add noodles, sauces. Toss vigorously.", "Garnish with spring onion. Serve hot."], similar: ["d06", "d08"]
   },
   {
     id: "d08", name: "Masala Pasta", type: "dinner", region: "Fusion", effort: 20, season: "all", combo: ["Garlic bread"], img: IMG.pasta,
     ingredients: [{ n: "Penne pasta", q: "400g" }, { n: "Onion", q: "100g" }, { n: "Tomato", q: "200g" }, { n: "Capsicum", q: "80g" }, { n: "Cream", q: "40ml" }, { n: "Italian herbs", q: "5g" }, { n: "Chili flakes", q: "3g" }, { n: "Cheese", q: "50g" }, { n: "Oil", q: "20ml" }, { n: "Salt", q: "8g" }],
-    tags: ["kid-friendly", "fusion", "quick"], noOG: false, macros: { cal: 380, p: 12, c: 52, f: 14, fb: 3 },
+    tags: ["kid-friendly", "fusion", "quick", "mild"], noOG: false, macros: { cal: 380, p: 12, c: 52, f: 14, fb: 3 },
     steps: ["Boil pasta al dente. Reserve pasta water.", "Sauté onion, capsicum. Add tomato, herbs, chili.", "Cook sauce thick. Add cream.", "Toss pasta in sauce with splash of pasta water.", "Top with cheese. Serve."], similar: ["d07", "d06"]
   },
   {
     id: "d09", name: "Paneer Wrap / Frankie", type: "dinner", region: "West", effort: 25, season: "all", combo: ["Green chutney"], img: IMG.wrap,
     ingredients: [{ n: "Wheat flour", q: "300g" }, { n: "Paneer", q: "250g" }, { n: "Capsicum", q: "80g" }, { n: "Onion", q: "100g" }, { n: "Tikka masala", q: "10g" }, { n: "Yogurt", q: "50g" }, { n: "Lemon", q: "1 pc" }, { n: "Oil", q: "20ml" }],
-    tags: ["wrap", "fun", "quick"], noOG: false, macros: { cal: 380, p: 18, c: 38, f: 18, fb: 3 },
+    tags: ["wrap", "fun", "quick", "medium"], noOG: false, macros: { cal: 380, p: 18, c: 38, f: 18, fb: 3 },
     steps: ["Marinate paneer and veggies in yogurt + masala.", "Make thin roomali-style rotis on tawa.", "Grill paneer filling till charred.", "Spread green chutney on roti, add filling, squeeze lemon.", "Roll tight and serve."], similar: ["d01", "d13"]
   },
   {
     id: "d10", name: "Dal Khichdi + Papad + Curd", type: "dinner", region: "North", effort: 20, season: "all", combo: ["Papad", "Curd", "Pickle"], img: IMG.khichdi,
     ingredients: [{ n: "Rice", q: "250g" }, { n: "Moong dal", q: "125g" }, { n: "Ghee", q: "30g" }, { n: "Cumin", q: "5g" }, { n: "Turmeric", q: "3g" }, { n: "Papad", q: "6 pcs" }, { n: "Curd", q: "300g" }, { n: "Pickle", q: "30g" }, { n: "Salt", q: "10g" }],
-    tags: ["comfort", "light", "everyday"], noOG: true, macros: { cal: 360, p: 13, c: 52, f: 10, fb: 5 },
+    tags: ["comfort", "light", "everyday", "mild"], noOG: true, macros: { cal: 360, p: 13, c: 52, f: 10, fb: 5 },
     steps: ["Wash rice + dal. Cook soft with turmeric, cumin, ghee, salt.", "Should be soft, porridge consistency.", "Top with generous ghee.", "Fry papad crisp.", "Serve with cold curd and pickle."], similar: ["d05", "d12"]
   },
   {
     id: "d11", name: "Idli + Sambhar Dinner", type: "dinner", region: "South", effort: 15, season: "all", combo: ["Chutney"], img: IMG.idli,
     ingredients: [{ n: "Idli batter", q: "500g" }, { n: "Toor dal", q: "150g" }, { n: "Mixed vegetables", q: "200g" }, { n: "Sambhar powder", q: "15g" }, { n: "Tamarind", q: "15g" }, { n: "Coconut", q: "50g" }, { n: "Salt", q: "10g" }],
-    tags: ["light", "steamed", "healthy"], noOG: false, macros: { cal: 250, p: 10, c: 40, f: 5, fb: 5 },
+    tags: ["light", "steamed", "healthy", "medium"], noOG: false, macros: { cal: 250, p: 10, c: 40, f: 5, fb: 5 },
     steps: ["Steam idlis in greased moulds.", "Cook thick sambhar with lots of vegetables.", "Make fresh coconut chutney.", "Serve hot idlis with sambhar and chutney.", "Light, easily digestible dinner."], similar: ["d03", "d04"]
   },
   {
     id: "d12", name: "Tomato Rice Bowl", type: "dinner", region: "South", effort: 20, season: "all", combo: ["Raita", "Papad"], img: IMG.pulao,
     ingredients: [{ n: "Basmati rice", q: "400g" }, { n: "Tomato", q: "300g" }, { n: "Onion", q: "80g" }, { n: "Peanuts", q: "30g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Mustard seeds", q: "5g" }, { n: "Turmeric", q: "3g" }, { n: "Ghee", q: "20g" }, { n: "Curd", q: "200g" }, { n: "Salt", q: "10g" }],
-    tags: ["one-pot", "tangy", "quick"], noOG: false, macros: { cal: 360, p: 9, c: 56, f: 11, fb: 4 },
+    tags: ["one-pot", "tangy", "quick", "medium"], noOG: false, macros: { cal: 360, p: 9, c: 56, f: 11, fb: 4 },
     steps: ["Cook rice. Roast peanuts.", "Make tomato masala with onion, spices.", "Mix with rice. Add peanuts.", "Make quick raita.", "Serve in bowls."], similar: ["d05", "d15"]
   },
   {
     id: "d13", name: "Stuffed Paratha Dinner", type: "dinner", region: "North", effort: 35, season: "winter", combo: ["Curd", "Pickle"], img: IMG.aloo_paratha,
     ingredients: [{ n: "Wheat flour", q: "400g" }, { n: "Paneer", q: "200g" }, { n: "Potato", q: "200g" }, { n: "Onion (for raita)", q: "50g" }, { n: "Curd", q: "300g" }, { n: "Pickle", q: "30g" }, { n: "Ghee", q: "40g" }, { n: "Salt", q: "10g" }],
-    tags: ["filling", "winter"], noOG: false, macros: { cal: 400, p: 15, c: 45, f: 18, fb: 4 },
+    tags: ["filling", "winter", "medium"], noOG: false, macros: { cal: 400, p: 15, c: 45, f: 18, fb: 4 },
     steps: ["Make paneer-aloo filling with spices.", "Knead dough. Stuff and roll parathas.", "Cook on tawa with ghee.", "Beat curd with onion, cumin for raita.", "Serve parathas with curd and pickle — a complete dinner."], similar: ["d01", "d09"]
   },
   {
     id: "d14", name: "Rajma Rice Bowl", type: "dinner", region: "North", effort: 40, season: "all", combo: ["Salad"], img: IMG.rajma,
     ingredients: [{ n: "Rajma", q: "250g" }, { n: "Onion", q: "150g" }, { n: "Tomato", q: "200g" }, { n: "Ginger-garlic paste", q: "15g" }, { n: "Basmati rice", q: "400g" }, { n: "Cucumber", q: "80g" }, { n: "Lemon", q: "1 pc" }, { n: "Salt", q: "10g" }],
-    tags: ["protein", "bowl"], noOG: false, macros: { cal: 420, p: 16, c: 60, f: 10, fb: 12 },
+    tags: ["protein", "bowl", "medium"], noOG: false, macros: { cal: 420, p: 16, c: 60, f: 10, fb: 12 },
     steps: ["Soak rajma overnight. Pressure cook.", "Make rich gravy with onion, tomato, spices.", "Cook rice aromatic.", "Assemble bowl: rice, rajma on top, fresh salad on side.", "Squeeze lemon. Hearty dinner."], similar: ["d01", "d15"]
   },
   {
     id: "d15", name: "Curd Rice + Pickle Dinner", type: "dinner", region: "South", effort: 10, season: "summer", combo: ["Pickle", "Papad"], img: IMG.pulao,
     ingredients: [{ n: "Cooked rice", q: "500g" }, { n: "Curd", q: "400g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "8 pcs" }, { n: "Pomegranate", q: "30g" }, { n: "Pickle", q: "30g" }, { n: "Papad", q: "6 pcs" }, { n: "Salt", q: "8g" }],
-    tags: ["cooling", "quick", "summer"], noOG: true, macros: { cal: 300, p: 9, c: 48, f: 7, fb: 2 },
+    tags: ["cooling", "quick", "summer", "mild"], noOG: true, macros: { cal: 300, p: 9, c: 48, f: 7, fb: 2 },
     steps: ["Mix warm rice with fresh curd. Salt.", "Make tadka: mustard, curry leaf, green chili.", "Pour over curd rice.", "Garnish with pomegranate.", "Serve with favourite pickle and fried papad."], similar: ["d05", "d12"]
   },
   {
     id: "d16", name: "Veg Pulao Dinner", type: "dinner", region: "North", effort: 25, season: "all", combo: ["Raita", "Pickle"], img: IMG.pulao,
     ingredients: [{ n: "Basmati rice", q: "400g" }, { n: "Mixed vegetables", q: "250g" }, { n: "Onion", q: "80g" }, { n: "Whole spices", q: "5g" }, { n: "Ghee", q: "20g" }, { n: "Curd", q: "200g" }, { n: "Cucumber", q: "80g" }, { n: "Salt", q: "10g" }],
-    tags: ["one-pot", "quick"], noOG: false, macros: { cal: 370, p: 9, c: 55, f: 12, fb: 4 },
+    tags: ["one-pot", "quick", "mild"], noOG: false, macros: { cal: 370, p: 9, c: 55, f: 12, fb: 4 },
     steps: ["Sauté whole spices and onion in ghee.", "Add vegetables, sauté 2 min.", "Add soaked rice, water. Cook.", "Make raita.", "Serve pulao with raita."], similar: ["d02", "d12"]
   },
   {
     id: "d17", name: "Malai Kofta Rice", type: "dinner", region: "North", effort: 45, season: "all", combo: ["Rice"], img: IMG.paneer_butter,
     ingredients: [{ n: "Paneer", q: "200g" }, { n: "Potato", q: "200g" }, { n: "Cashew", q: "30g" }, { n: "Tomato", q: "250g" }, { n: "Onion", q: "150g" }, { n: "Cream", q: "60ml" }, { n: "Basmati rice", q: "400g" }, { n: "Oil", q: "200ml" }, { n: "Salt", q: "10g" }],
-    tags: ["rich", "special"], noOG: false, macros: { cal: 480, p: 16, c: 50, f: 24, fb: 3 },
+    tags: ["rich", "special", "mild"], noOG: false, macros: { cal: 480, p: 16, c: 50, f: 24, fb: 3 },
     steps: ["Mash paneer + potato. Stuff with cashew. Shape balls. Fry golden.", "Blend onion, tomato, cashew. Cook with spices.", "Add cream. Adjust gravy.", "Place koftas in gravy before serving.", "Serve over aromatic rice."], similar: ["d01", "d02"]
   },
   {
     id: "d18", name: "Pav Bhaji Dinner", type: "dinner", region: "West", effort: 30, season: "all", combo: ["Pav", "Onion"], img: IMG.pav_bhaji,
     ingredients: [{ n: "Potato", q: "400g" }, { n: "Cauliflower", q: "150g" }, { n: "Mixed vegetables", q: "200g" }, { n: "Butter", q: "80g" }, { n: "Pav bhaji masala", q: "20g" }, { n: "Pav buns", q: "12 pcs" }, { n: "Onion", q: "100g" }, { n: "Lemon", q: "2 pcs" }],
-    tags: ["street-food", "fun"], noOG: false, macros: { cal: 420, p: 10, c: 56, f: 18, fb: 6 },
+    tags: ["street-food", "fun", "medium"], noOG: false, macros: { cal: 420, p: 10, c: 56, f: 18, fb: 6 },
     steps: ["Boil and mash all vegetables.", "Cook with butter, masala, onion, tomato.", "Mash everything smooth.", "Toast pav in butter.", "Serve bhaji with buttered pav, onion, lemon."], similar: ["d06", "d09"]
   },
   {
     id: "d19", name: "Kadhi Chawal Dinner", type: "dinner", region: "North", effort: 30, season: "monsoon", combo: ["Rice", "Papad"], img: IMG.kadhi,
     ingredients: [{ n: "Besan", q: "100g" }, { n: "Curd", q: "400g" }, { n: "Onion", q: "80g" }, { n: "Basmati rice", q: "400g" }, { n: "Ghee", q: "20g" }, { n: "Mustard seeds", q: "5g" }, { n: "Fenugreek seeds", q: "3g" }, { n: "Salt", q: "10g" }],
-    tags: ["comfort", "monsoon"], noOG: false, macros: { cal: 360, p: 12, c: 52, f: 11, fb: 3 },
+    tags: ["comfort", "monsoon", "mild"], noOG: false, macros: { cal: 360, p: 12, c: 52, f: 11, fb: 3 },
     steps: ["Whisk besan + curd + water smooth.", "Make pakoras. Fry golden.", "Cook kadhi with tadka. Simmer 20 min.", "Add pakoras.", "Serve over steamed rice with papad."], similar: ["d05", "d10"]
   },
   {
     id: "d20", name: "Sarson Saag + Makki Roti", type: "dinner", region: "North", effort: 45, season: "winter", combo: ["Jaggery", "Butter"], img: IMG.palak_paneer,
     ingredients: [{ n: "Mustard greens", q: "500g" }, { n: "Spinach", q: "200g" }, { n: "Maize flour", q: "250g" }, { n: "Ghee", q: "40g" }, { n: "Ginger", q: "10g" }, { n: "Green chili", q: "2 pcs" }, { n: "Butter", q: "30g" }, { n: "Jaggery", q: "20g" }],
-    tags: ["seasonal", "punjabi"], noOG: false, macros: { cal: 360, p: 10, c: 44, f: 16, fb: 8 },
+    tags: ["seasonal", "punjabi", "medium"], noOG: false, macros: { cal: 360, p: 10, c: 44, f: 16, fb: 8 },
     steps: ["Chop and pressure cook greens with ginger, chili.", "Blend coarsely. Cook on low 30 min.", "Pat makki rotis. Cook on tawa with ghee.", "Top saag with butter.", "Serve with makki roti and jaggery."], similar: ["d13"]
   },
   {
     id: "d21", name: "Cheese Grilled Sandwich", type: "dinner", region: "Fusion", effort: 15, season: "all", combo: ["Tomato soup"], img: IMG.wrap,
     ingredients: [{ n: "Bread", q: "12 slices" }, { n: "Cheese", q: "150g" }, { n: "Capsicum", q: "50g" }, { n: "Onion", q: "50g" }, { n: "Tomato", q: "80g" }, { n: "Corn", q: "50g" }, { n: "Green chutney", q: "30g" }, { n: "Butter", q: "40g" }, { n: "Mixed vegetables (for soup)", q: "200g" }, { n: "Salt", q: "8g" }],
-    tags: ["quick", "kid-friendly", "fusion"], noOG: false, macros: { cal: 350, p: 14, c: 38, f: 16, fb: 3 },
+    tags: ["quick", "kid-friendly", "fusion", "mild"], noOG: false, macros: { cal: 350, p: 14, c: 38, f: 16, fb: 3 },
     steps: ["Spread green chutney on bread. Layer cheese, chopped vegetables.", "Grill in sandwich maker or on tawa with butter.", "For soup: cook vegetables, blend, season.", "Cut sandwiches diagonally.", "Serve with hot tomato soup."], similar: ["d08", "d09"]
   },
   {
     id: "d22", name: "Lemon Rice Bowl", type: "dinner", region: "South", effort: 15, season: "summer", combo: ["Papad", "Pickle"], img: IMG.pulao,
     ingredients: [{ n: "Cooked rice", q: "500g" }, { n: "Lemon", q: "3 pcs" }, { n: "Peanuts", q: "40g" }, { n: "Mustard seeds", q: "5g" }, { n: "Curry leaves", q: "10 pcs" }, { n: "Turmeric", q: "3g" }, { n: "Green chili", q: "3 pcs" }, { n: "Oil", q: "20ml" }, { n: "Salt", q: "8g" }],
-    tags: ["tangy", "quick", "summer"], noOG: true, macros: { cal: 320, p: 8, c: 52, f: 10, fb: 3 },
+    tags: ["tangy", "quick", "summer", "mild"], noOG: true, macros: { cal: 320, p: 8, c: 52, f: 10, fb: 3 },
     steps: ["Cook rice. Cool slightly.", "Make tadka: mustard, curry leaves, peanuts, chili, turmeric.", "Add rice to tadka. Toss.", "Squeeze generous lemon juice. Mix.", "Serve with papad and pickle."], similar: ["d12", "d15"]
   },
   {
     id: "d23", name: "Tamarind Rice (Puliyogare)", type: "dinner", region: "South", effort: 20, season: "all", combo: ["Papad", "Curd"], img: IMG.pulao,
     ingredients: [{ n: "Cooked rice", q: "500g" }, { n: "Tamarind", q: "30g" }, { n: "Peanuts", q: "40g" }, { n: "Sesame seeds", q: "15g" }, { n: "Curry leaves", q: "10 pcs" }, { n: "Mustard seeds", q: "5g" }, { n: "Turmeric", q: "3g" }, { n: "Jaggery", q: "10g" }, { n: "Oil", q: "20ml" }],
-    tags: ["tangy", "south-indian"], noOG: true, macros: { cal: 340, p: 8, c: 54, f: 11, fb: 3 },
+    tags: ["tangy", "south-indian", "medium"], noOG: true, macros: { cal: 340, p: 8, c: 54, f: 11, fb: 3 },
     steps: ["Extract thick tamarind juice.", "Roast peanuts, sesame. Make masala paste.", "Make tadka, add tamarind, jaggery, masala. Cook thick.", "Mix with rice. Each grain coated.", "Serve with papad and curd."], similar: ["d22", "d12"]
   },
 ];
@@ -442,6 +442,7 @@ function genPlan(locked = {}, disliked = [], prefs = {}) {
       if (!isWknd) c = c.filter(m => m.effort <= 35);
       if (prefs.regions?.length) c = c.filter(m => prefs.regions.includes(m.region) || m.region === "Fusion");
       if (prefs.maxEffort) c = c.filter(m => m.effort <= prefs.maxEffort);
+      if (prefs.spice) c = c.filter(m => m.tags.includes(prefs.spice) || (prefs.spice !== "medium" && m.tags.includes("medium")));
       if (!c.length) c = DB.filter(m => m.type === mt && !disliked.includes(m.id));
       const pick = shuf(c)[0];
       if (pick) { plan[ds][mt] = pick; used.add(pick.id); }
