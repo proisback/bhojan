@@ -443,6 +443,7 @@ function genPlan(locked = {}, disliked = [], prefs = {}) {
       if (prefs.regions?.length) c = c.filter(m => prefs.regions.includes(m.region) || m.region === "Fusion");
       if (prefs.maxEffort) c = c.filter(m => m.effort <= prefs.maxEffort);
       if (prefs.spice) c = c.filter(m => m.tags.includes(prefs.spice) || (prefs.spice !== "medium" && m.tags.includes("medium")));
+      if (!c.length) c = DB.filter(m => m.type === mt && !disliked.includes(m.id) && (!prefs.spice || m.tags.includes(prefs.spice) || (prefs.spice !== "medium" && m.tags.includes("medium"))));
       if (!c.length) c = DB.filter(m => m.type === mt && !disliked.includes(m.id));
       const pick = shuf(c)[0];
       if (pick) { plan[ds][mt] = pick; used.add(pick.id); }
